@@ -9,13 +9,13 @@ const styles = StyleSheet.create({
   }
 })
 
-export default class Whisper extends Component{
+export default class SchemeEntrance extends Component{
   render(){
     return(
-      <Card style ={styles.card}>
-        <Card.Title title="纪念日" left={(props) => <Avatar.Icon {...props} icon="event" />} />
+      <Card style={styles.card}>
+        <Card.Title title="恋爱打卡" left={(props) => <Avatar.Icon {...props} icon="check" />} />
         <Card.Content>
-          <Paragraph>纪念日的subtitle</Paragraph>
+          <Paragraph>恋爱打卡的subtitle</Paragraph>
         </Card.Content>
       </Card>
     )
