@@ -8,7 +8,8 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
-import { Button as PaperButton} from 'react-native-paper';
+import {Button as PaperButton,Drawer} from 'react-native-paper';
+import SideMenu from 'react-native-side-menu';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -17,18 +18,37 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-type Props = {};
-export default class App extends Component<Props> {
+
+export default class App extends Component{
+  state={
+    active:'first'
+  }
   render() {
+    const {acitve} = this.state;
+    // const menu = (<Text>234</Text>);
+    const menu = (<Drawer.Section title="Some title">
+      <Drawer.Item
+        label="First Item"
+        active={this.active === 'first'}
+        onPress={() => { this.setState({ active: 'first' }); }}
+      />
+      <Drawer.Item
+        label="Second Item"
+        active={this.active === 'second'}
+        onPress={() => { this.setState({ active: 'second' }); }}
+      />
+  </Drawer.Section>);
     return (
-      <View style={styles.container}>
-        <PaperButton icon="add-a-photo" mode="contained" onPress={() => console.log('Pressed')}>
-          Press me
-        </PaperButton>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
+        <SideMenu menu={menu}>
+          <View style={styles.container}>
+            <PaperButton icon="add-a-photo" mode="contained" onPress={() => console.log('Pressed')}>
+              Press me
+            </PaperButton>
+            <Text style={styles.welcome}>Welcome to React Native!</Text>
+            <Text style={styles.instructions}>To get started, edit App.js</Text>
+            <Text style={styles.instructions}>{instructions}</Text>
+          </View>
+        </SideMenu>
     );
   }
 }
