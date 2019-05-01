@@ -39,9 +39,8 @@ export default class Home extends Component{
   render(){
     return(
       <PaperProvider theme={theme}>
-          <StatusBar style ={styles.statusBar} translucent={true} backgroundColor='#1874CD' />
           <View style={styles.container}>
-            
+          <StatusBar style ={styles.statusBar} translucent={true} backgroundColor='#1874CD' />
           <View style={styles.home}>
           <Welcome />
           <Whisper />
