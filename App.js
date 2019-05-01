@@ -1,11 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View,StatusBar} from 'react-native';
 import {Button as PaperButton,Drawer,Provider as PaperProvider,DefaultTheme} from 'react-native-paper';
@@ -23,6 +15,21 @@ const theme = {
   }
 };
 
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 80,
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  drawer:{
+    paddingTop:60
+  }
+});
+
 export default class App extends Component{
   state={
     active:'first'
@@ -30,7 +37,7 @@ export default class App extends Component{
   render() {
     const {acitve} = this.state;
     const menu = (
-      <Drawer.Section title="Some title">
+      <Drawer.Section title="功能菜单" style={styles.drawer}>
         <Drawer.Item
           label="First Item"
           active={this.active === 'first'}
@@ -43,9 +50,15 @@ export default class App extends Component{
         />
       </Drawer.Section>
     );
+    
     return (
         <PaperProvider theme={theme}>
-          <SideMenu menu={menu}>
+          <SideMenu 
+            menu={menu}
+            openMenuOffset={160}
+            edgeHitWidth={140}
+
+          >
             <StatusBar translucent={true} backgroundColor='#1874CD' />
             <View style={styles.container}>
               <Home />
@@ -55,22 +68,3 @@ export default class App extends Component{
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});

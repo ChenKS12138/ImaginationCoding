@@ -7,10 +7,6 @@ const style = StyleSheet.create({
   }
 })
 
-export default class Welcome extends Component{
-  render(){
-    return(
-      <Text style={style.title}>欢迎</Text>
-    )
-  }
-}
+export default Welcome = () => (
+  <Text style={style.title}>欢迎</Text>
+)
