@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
-import {StyleSheet,ScrollView} from 'react-native';
+import {StyleSheet,ScrollView,Text,View} from 'react-native';
 import {createStackNavigator,createDrawerNavigator,createAppContainer,DrawerItems, SafeAreaView} from 'react-navigation';
 
 import Home from './js/views/Home';
-import Whisper from './js/views/Whisper';
+import Whisper from './js/views/Whisper/Whisper';
+import About from './js/views/About';
+// import Test from './Test';
 
 const styles = StyleSheet.create({
   container:{
@@ -28,12 +30,18 @@ const DrawerNavigatior = createDrawerNavigator(
     Whisper:{
       screen:Whisper,
       path:'/whisper'
+    },
+    About:{
+      screen:About,
+      path:'/about'
     }
   },
   {
     drawerBackgroundColor:'white',
     contentComponent:DrawerContent,
-    initialRouteName:'Whisper'
+    initialRouteName:'Whisper',
+    edgeWidth:80,
+    drawerWidth:250
   }
 )
 
@@ -45,4 +53,9 @@ export default class App extends Component{
       <AppContainer />
     )
   }
+  // render(){
+  //   return(
+  //     <Test />
+  //   )
+  // }
 }

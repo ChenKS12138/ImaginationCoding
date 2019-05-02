@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {StyleSheet,Text,View,StatusBar} from 'react-native';
+import {StyleSheet,Text,View,StatusBar,ScrollView} from 'react-native';
 import {Avatar,Button,Card,Title,Paragraph,Drawer,Provider as PaperProvider,DefaultTheme} from 'react-native-paper';
 
 import Welcome from '../components/Welcome';
@@ -39,14 +39,16 @@ export default class Home extends Component{
   render(){
     return(
       <PaperProvider theme={theme}>
-          <View style={styles.container}>
-          <StatusBar style ={styles.statusBar} translucent={true} backgroundColor='#1874CD' />
+        <View style={styles.container}>
+          {/* <StatusBar style ={styles.statusBar} translucent={true} backgroundColor='#1874CD' /> */}
           <View style={styles.home}>
-          <Welcome />
-          <Whisper />
-          <Album />
-          <Scheme />
-          <Commemoration />
+          <ScrollView>
+            <Welcome text="欢迎" />
+            <Whisper />
+            <Album />
+            <Scheme />
+            <Commemoration />
+          </ScrollView>
         </View>
           </View>
       </PaperProvider>
