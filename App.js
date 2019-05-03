@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
 import {StyleSheet,ScrollView,Text,View} from 'react-native';
 import {createStackNavigator,createDrawerNavigator,createAppContainer,DrawerItems, SafeAreaView} from 'react-navigation';
+import NavigationService from './src/utils/NavigationService'; 
 
-import Home from './js/views/Home';
-import Whisper from './js/views/Whisper/Whisper';
-import About from './js/views/About';
-// import Test from './Test';
+import Home from './src/views/Home';
+import Whisper from './src/views/Whisper/Whisper';
+import Commemoration from './src/views/Commemoration/Commemoration';
+import Album from './src/views/Album/Album';
+import Scheme from './src/views/Scheme/Scheme';
+import About from './src/views/About/About';
 
 const styles = StyleSheet.create({
   container:{
@@ -31,6 +34,18 @@ const DrawerNavigatior = createDrawerNavigator(
       screen:Whisper,
       path:'/whisper'
     },
+    Album:{
+      screen:Album,
+      path:'/album'
+    },
+    Scheme:{
+      screen:Scheme,
+      path:'/scheme'
+    },
+    Commemoration:{
+      screen:Commemoration,
+      path:'/commemoration'
+    },
     About:{
       screen:About,
       path:'/about'
@@ -39,9 +54,10 @@ const DrawerNavigatior = createDrawerNavigator(
   {
     drawerBackgroundColor:'white',
     contentComponent:DrawerContent,
-    initialRouteName:'Whisper',
+    initialRouteName:'Home',
     edgeWidth:80,
-    drawerWidth:250
+    drawerWidth:250,
+    useNativeAnimations:false
   }
 )
 
@@ -50,12 +66,11 @@ const AppContainer = createAppContainer(DrawerNavigatior);
 export default class App extends Component{
   render(){
     return(
-      <AppContainer />
+      <AppContainer
+        ref={navigatorRef => {
+          NavigationService.setTopLevelNavigator(navigatorRef);
+        }}
+      />
     )
   }
-  // render(){
-  //   return(
-  //     <Test />
-  //   )
-  // }
 }
