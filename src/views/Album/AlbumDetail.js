@@ -3,6 +3,9 @@ import {View,Text,ScrollView,StyleSheet} from 'react-native';
 import {FAB,Avatar,Button,Card,Title,Paragraph,Drawer,Provider as PaperProvider,DefaultTheme} from 'react-native-paper';
 
 import Welcome from '../../components/Welcome';
+import ColorBar from '../../components/ColorBar';
+import HeaderBar from '../../components/HeaderBar';
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -41,8 +44,15 @@ const theme = {
 export default class AlbumDetail extends Component{
   render(){
     const {title='新照片',image=null,time='刚刚',description='这是照片'} = this.props.navigation.state.params;
+    const {goBack} = this.props.navigation;
     return(
       <PaperProvider theme={theme}>
+        <ColorBar />
+        <HeaderBar 
+          iconType="back"
+          text="照片详情"
+          onPress={() => goBack()}
+        />
         <View style={styles.container}>
           {/* <StatusBar style ={styles.statusBar} translucent={true} backgroundColor='#1874CD' /> */}
             <View style={styles.album}>

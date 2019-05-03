@@ -5,40 +5,20 @@ import {createAppContainer,createStackNavigator} from 'react-navigation';
 import SchemeHome from './SchemeHome';
 import SchemeCreate from './SchemeCreate';
 import SchemeDetail from './SchemeDetail';
-import HeaderBarMenu from '../../components/HeaderBarMenu';
-import NavigationService from '../../utils/NavigationService';
 
 const stackContent = createStackNavigator(
   {
     SchemeHome:{
       screen:SchemeHome,
-      path:'/scheme',
-      navigationOptions:() => ({
-        title:`Scheme`,
-        headerLeft: () => {
-          return(<HeaderBarMenu iconType='menu' onPress={() => NavigationService.toggleDrawer()}/>)
-        }
-      })
+      path:'/scheme'
     },
     SchemeCreate:{
       screen:SchemeCreate,
-      path:'/scheme/create',
-      navigationOptions:{
-        title:`SchemeCreate`,
-        headerLeft: handle => {
-          return(<HeaderBarMenu iconType='back' onPress={() => handle.scene.descriptor.navigation.goBack()}/>)
-        }
-      }
+      path:'/scheme/create'
     },
     SchemeDetail:{
       screen:SchemeDetail,
-      path:'/scheme/detail',
-      navigationOptions:{
-        title:`SchemeDetail`,
-        headerLeft: handle => {
-          return(<HeaderBarMenu iconType='back' onPress={() => handle.scene.descriptor.navigation.goBack()}/>)
-        }
-      }
+      path:'/scheme/detail'
     }
   },
   {
@@ -49,7 +29,7 @@ const stackContent = createStackNavigator(
       headerTitleStyle:{
         color:'white'
       },
-      headerLeft:() => (<HeaderBarMenu />)
+      header:null
     }
   }
 )

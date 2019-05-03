@@ -3,6 +3,9 @@ import {View,Text,ScrollView,StyleSheet} from 'react-native';
 import {FAB,Avatar,Button,Card,Title,Paragraph,Drawer,Provider as PaperProvider,DefaultTheme} from 'react-native-paper';
 
 import Welcome from '../../components/Welcome';
+import ColorBar from '../../components/ColorBar';
+import HeaderBar from '../../components/HeaderBar';
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -41,8 +44,15 @@ const theme = {
 export default class CommemorationDetail extends Component{
   render(){
     const {title,anuual,time} = this.props.navigation.state.params;
+    const {goBack} = this.props.navigation;
     return(
       <PaperProvider theme={theme}>
+        <ColorBar />
+        <HeaderBar 
+          text="纪念日详情"
+          iconType="back"
+          onPress={() => goBack()}
+        />
         <View style={styles.container}>
           {/* <StatusBar style ={styles.statusBar} translucent={true} backgroundColor='#1874CD' /> */}
             <View style={styles.Commemoration}>

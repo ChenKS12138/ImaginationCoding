@@ -3,6 +3,9 @@ import {View,Text,ScrollView,StyleSheet} from 'react-native';
 import {TextInput,FAB,Avatar,Button,Card,Title,Paragraph,Drawer,Provider as PaperProvider,DefaultTheme} from 'react-native-paper';
 
 import Welcome from '../../components/Welcome';
+import ColorBar from '../../components/ColorBar';
+import HeaderBar from '../../components/HeaderBar';
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -46,6 +49,12 @@ export default class SchemeCreate extends Component{
     const {navigate,goBack} = this.props.navigation;
     return(
       <PaperProvider theme={theme}>
+        <ColorBar />
+        <HeaderBar 
+          text="新的打卡计划"
+          iconType="back"
+          onPress={() => goBack()}
+        />
         <View style={styles.container}>
           {/* <StatusBar style ={styles.statusBar} translucent={true} backgroundColor='#1874CD' /> */}
             <View style={styles.scheme}>

@@ -9,6 +9,7 @@ import Album from '../components/AlbumEntrance';
 import Scheme from '../components/SchemeEntrance';
 import Commemoration from '../components/CommemorationEntrance';
 import HeaderBar from '../components/HeaderBar';
+import ColorBar from '../components/ColorBar';
 
 const theme = {
   ...DefaultTheme,
@@ -39,6 +40,7 @@ export default class Home extends Component{
     const {navigate} = this.props.navigation;
     return(
       <PaperProvider theme={theme}>
+      <ColorBar />
       <HeaderBar
         iconType="menu"
         text="home"

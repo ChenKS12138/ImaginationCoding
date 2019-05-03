@@ -6,6 +6,8 @@ import { DrawerActions } from 'react-navigation-drawer';
 
 import Welcome from '../../components/Welcome';
 import PaddingView from '../../components/PaddingView';
+import ColorBar from '../../components/ColorBar';
+import NavigationService from '../../utils/NavigationService';
 import HeaderBar from '../../components/HeaderBar';
 
 import img0 from '../../assets/img/img0.jpg';
@@ -86,9 +88,14 @@ const fakeData= [
 export default class SchemeHome extends Component{
   render(){
     const {navigate} = this.props.navigation;
-    const {rootNavigation} = this.props;
     return(
       <PaperProvider theme={theme}>
+        <ColorBar />
+        <HeaderBar 
+          text="照片时光机"
+          iconType="menu"
+          onPress={() => NavigationService.toggleDrawer()}
+        />
         <View style={styles.container}>
           {/* <StatusBar style ={styles.statusBar} translucent={true} backgroundColor='#1874CD' /> */}
             <View style={styles.album}>

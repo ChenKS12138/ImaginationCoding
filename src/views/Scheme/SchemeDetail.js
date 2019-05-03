@@ -4,6 +4,8 @@ import {FAB,Avatar,Button,Card,Title,Paragraph,Drawer,Provider as PaperProvider,
 
 import Welcome from '../../components/Welcome';
 import CommonButton from '../../components/CommonButton';
+import ColorBar from '../../components/ColorBar';
+import HeaderBar from '../../components/HeaderBar';
 
 const styles = StyleSheet.create({
   container: {
@@ -43,8 +45,15 @@ const theme = {
 export default class SchemeDetail extends Component{
   render(){
     const {title,timeList} = this.props.navigation.state.params;
+    const {goBack} = this.props.navigation;
     return(
       <PaperProvider theme={theme}>
+        <ColorBar />
+        <HeaderBar 
+          text="计划详情"
+          iconType="back"
+          onPress={() =>goBack()}
+        />
         <View style={styles.container}>
           {/* <StatusBar style ={styles.statusBar} translucent={true} backgroundColor='#1874CD' /> */}
             <View style={styles.scheme}>

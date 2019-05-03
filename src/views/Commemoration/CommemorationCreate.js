@@ -5,6 +5,9 @@ import DatePicker from 'react-native-datepicker'
 
 
 import Welcome from '../../components/Welcome';
+import HeaderBar from '../../components/HeaderBar';
+import ColorBar from '../../components/ColorBar';
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -50,6 +53,12 @@ export default class CommemorationCreate extends Component{
     const {navigate,goBack} = this.props.navigation;
     return(
       <PaperProvider theme={theme}>
+        <ColorBar />
+        <HeaderBar 
+          text="新的纪念日"
+          iconType="back"
+          onPress={() => goBack()}
+        />
         <View style={styles.container}>
           {/* <StatusBar style ={styles.statusBar} translucent={true} backgroundColor='#1874CD' /> */}
             <View style={styles.commemoration}>

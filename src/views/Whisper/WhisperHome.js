@@ -4,6 +4,9 @@ import {FAB,Avatar,Button,Card,Title,Paragraph,Drawer,Provider as PaperProvider,
 import moment from 'moment';
 
 import Welcome from '../../components/Welcome';
+import HeaderBar from '../../components/HeaderBar';
+import ColorBar from '../../components/ColorBar';
+import NavigationService from '../../utils/NavigationService';
 
 const styles = StyleSheet.create({
   container: {
@@ -56,8 +59,13 @@ export default class WhisperHome extends Component{
     const {navigate} = this.props.navigation;
     return(
       <PaperProvider theme={theme}>
+        <ColorBar/>
+        <HeaderBar 
+          text="悄悄话"
+          iconType="menu"
+          onPress={() => NavigationService.toggleDrawer()}
+        />
         <View style={styles.container}>
-          {/* <StatusBar style ={styles.statusBar} translucent={true} backgroundColor='#1874CD' /> */}
             <View style={styles.whisper}>
               <Welcome text="悄悄话" />
               <ScrollView

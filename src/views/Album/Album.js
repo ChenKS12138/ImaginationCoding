@@ -13,33 +13,15 @@ const stackContent = createStackNavigator(
   {
     AlbumHome:{
       screen:AlbumHome,
-      path:'/album',
-      navigationOptions:{
-        title:`Album`,
-        headerLeft: () => {
-          return(<HeaderBarMenu iconType='menu' onPress={() => NavigationService.toggleDrawer()}/>)
-        }
-      }
+      path:'/album'
     },
     AlbumCreate:{
       screen:AlbumCreate,
-      path:'/album/create',
-      navigationOptions:{
-        title:`AlbumCreate`,
-        headerLeft: handle => {
-          return(<HeaderBarMenu iconType='back' onPress={() => handle.scene.descriptor.navigation.goBack()}/>)
-        }
-      }
+      path:'/album/create'
     },
     AlbumDetail:{
       screen:AlbumDetail,
-      path:'/album/detail',
-      navigationOptions:{
-        title:`AlbumDetail`,
-        headerLeft: handle => {
-          return(<HeaderBarMenu iconType='back' onPress={() => handle.scene.descriptor.navigation.goBack()}/>)
-        }
-      }
+      path:'/album/detail'
     }
   },
   {
@@ -49,7 +31,8 @@ const stackContent = createStackNavigator(
       },
       headerTitleStyle:{
         color:'white'
-      }
+      },
+      header:null
     }
   }
 )

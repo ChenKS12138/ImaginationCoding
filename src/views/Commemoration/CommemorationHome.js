@@ -5,6 +5,9 @@ import moment from 'moment';
 
 import Welcome from '../../components/Welcome';
 import PaddingView from '../../components/PaddingView';
+import HeaderBar from '../../components/HeaderBar';
+import ColorBar from '../../components/ColorBar';
+import NavigationService from '../../utils/NavigationService';
 
 const styles = StyleSheet.create({
   container: {
@@ -82,8 +85,13 @@ export default class CommemorationHome extends Component{
     const {navigate} = this.props.navigation;
     return(
       <PaperProvider theme={theme}>
+        <ColorBar />
+        <HeaderBar 
+          text="纪念日"
+          iconType="menu"
+          onPress={() => NavigationService.toggleDrawer()}
+        />
         <View style={styles.container}>
-          {/* <StatusBar style ={styles.statusBar} translucent={true} backgroundColor='#1874CD' /> */}
             <View style={styles.commemoration}>
               <ScrollView
                 showsVerticalScrollIndicator={false}

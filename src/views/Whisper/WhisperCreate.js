@@ -3,6 +3,9 @@ import {View,Text,ScrollView,StyleSheet} from 'react-native';
 import {TextInput,FAB,Avatar,Button,Card,Title,Paragraph,Drawer,Provider as PaperProvider,DefaultTheme} from 'react-native-paper';
 
 import Welcome from '../../components/Welcome';
+import HeaderBar from '../../components/HeaderBar';
+import ColorBar from '../../components/ColorBar';
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -49,8 +52,13 @@ export default class WhisperCreate extends Component{
     const {goBack} = this.props.navigation;
     return(
       <PaperProvider theme={theme}>
+        <ColorBar />
+        <HeaderBar 
+          text="新的悄悄话"
+          iconType="back"
+          onPress={() => goBack()}
+        />
         <View style={styles.container}>
-          {/* <StatusBar style ={styles.statusBar} translucent={true} backgroundColor='#1874CD' /> */}
             <View style={styles.whisper}>
               <Welcome text="新的悄悄话" />
               <ScrollView>

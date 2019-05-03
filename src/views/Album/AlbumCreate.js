@@ -4,6 +4,9 @@ import {TextInput,FAB,Avatar,Button,Card,Title,Paragraph,Drawer,Provider as Pape
 import ImagePicker from 'react-native-image-picker';
 
 import Welcome from '../../components/Welcome';
+import ColorBar from '../../components/ColorBar';
+import HeaderBar from '../../components/HeaderBar';
+
 
 const styles = StyleSheet.create({
   container: {
@@ -54,11 +57,16 @@ export default class AlbumCreate extends Component{
     
   };
   render(){
-    const {navigate,goBack} = this.props.navigation;
+    const {goBack} = this.props.navigation;
     return(
       <PaperProvider theme={theme}>
+        <ColorBar />
+        <HeaderBar
+          iconType="back"
+          text="新的照片"
+          onPress={() => goBack()}
+        />
         <View style={styles.container}>
-          {/* <StatusBar style ={styles.statusBar} translucent={true} backgroundColor='#1874CD' /> */}
             <View style={styles.album}>
               <Welcome text="新的照片" />
               <ScrollView>

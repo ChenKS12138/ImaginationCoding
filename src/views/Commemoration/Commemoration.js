@@ -12,33 +12,15 @@ const stackContent = createStackNavigator(
   {
     CommemorationHome:{
       screen:CommemorationHome,
-      path:'/commemoration',
-      navigationOptions:() => ({
-        title:`Commemoration`,
-        headerLeft: () => {
-          return(<HeaderBarMenu iconType='menu' onPress={() => NavigationService.toggleDrawer()}/>)
-        }
-      })
+      path:'/commemoration'
     },
     CommemorationCreate:{
       screen:CommemorationCreate,
-      path:'/commemoration/create',
-      navigationOptions:{
-        title:`CommemorationCreate`,
-        headerLeft: handle => {
-          return(<HeaderBarMenu iconType='back' onPress={() => handle.scene.descriptor.navigation.goBack()}/>)
-        }
-      }
+      path:'/commemoration/create'
     },
     CommemorationDetail:{
       screen:CommemorationDetail,
-      path:'commemoration/detail',
-      navigationOptions:{
-        title:`CommemorationDetail`,
-        headerLeft: handle => {
-          return(<HeaderBarMenu iconType='back' onPress={() => handle.scene.descriptor.navigation.goBack()}/>)
-        }
-      }
+      path:'commemoration/detail'
     }
   },
   {
@@ -48,7 +30,8 @@ const stackContent = createStackNavigator(
       },
       headerTitleStyle:{
         color:'white'
-      }
+      },
+      header:null
     }
   }
 )

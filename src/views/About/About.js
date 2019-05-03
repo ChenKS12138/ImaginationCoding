@@ -4,19 +4,12 @@ import {createAppContainer,createStackNavigator} from 'react-navigation';
 
 import AboutHome from './AboutHome';
 import HeaderBarMenu from '../../components/HeaderBarMenu';
-import NavigationService from '../../utils/NavigationService';
 
 const stackContent = createStackNavigator(
   {
     AboutHome:{
       screen:AboutHome,
-      path:'/about',
-      navigationOptions:() => ({
-        title:`关于`,
-        headerLeft: () => {
-          return(<HeaderBarMenu iconType='menu' onPress={() => NavigationService.toggleDrawer()}/>)
-        }
-      })
+      path:'/about'
     }
   },
   {
@@ -26,7 +19,8 @@ const stackContent = createStackNavigator(
       },
       headerTitleStyle:{
         color:'white'
-      }
+      },
+      header:null
     }
   }
 )
