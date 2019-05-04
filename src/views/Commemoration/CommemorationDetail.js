@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import {View,Text,ScrollView,StyleSheet} from 'react-native';
 import {FAB,Avatar,Button,Card,Title,Paragraph,Drawer,Provider as PaperProvider,DefaultTheme} from 'react-native-paper';
+import moment from 'moment';
 
 import Welcome from '../../components/Welcome';
 import ColorBar from '../../components/ColorBar';
@@ -54,14 +55,13 @@ export default class CommemorationDetail extends Component{
           onPress={() => goBack()}
         />
         <View style={styles.container}>
-          {/* <StatusBar style ={styles.statusBar} translucent={true} backgroundColor='#1874CD' /> */}
             <View style={styles.Commemoration}>
               <Welcome text="纪念日详情" />
               <ScrollView>
                 <Card 
                   style={styles.card}
                 >
-                  <Card.Title title={time}/>
+                  <Card.Title title={moment(time).format('YYYY-MM-DD')}/>
                   <Card.Content>
                     <Paragraph>{title}</Paragraph>
                   </Card.Content>

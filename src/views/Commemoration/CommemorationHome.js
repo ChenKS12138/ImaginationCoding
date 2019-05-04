@@ -1,13 +1,18 @@
 import React,{Component} from 'react';
-import {StyleSheet,Text,View,StatusBar,ScrollView} from 'react-native';
+import {StyleSheet,Text,View,StatusBar,ScrollView,DeviceEventEmitter} from 'react-native';
 import {FAB,Avatar,Button,Card,Title,Paragraph,Drawer,Provider as PaperProvider,DefaultTheme} from 'react-native-paper';
 import moment from 'moment';
+import momentLocale from 'moment/locale/zh-cn';
+import Storager from '../../api/Storager';
+import genKey from '../../utils/randomString';
 
 import Welcome from '../../components/Welcome';
 import PaddingView from '../../components/PaddingView';
 import HeaderBar from '../../components/HeaderBar';
 import ColorBar from '../../components/ColorBar';
 import NavigationService from '../../utils/NavigationService';
+
+moment.updateLocale('zh-cn', momentLocale);
 
 const styles = StyleSheet.create({
   container: {
@@ -81,6 +86,9 @@ const fakeData= [
 ]
 
 export default class CommemorationHome extends Component{
+  state={
+    commemorationData:[]
+  }
   render(){
     const {navigate} = this.props.navigation;
     return(
@@ -98,17 +106,17 @@ export default class CommemorationHome extends Component{
                 style={styles.ScrollView}
               >
                 <Welcome text="纪念日" />
-                {fakeData.map((item,index) => {
+                {this.state.commemorationData.map((item,index) => {
                   return(
                     <Card style={styles.card} key={index} onPress={() => navigate('CommemorationDetail',{
-                      title:item.title,
+                      title:item.text,
                       time:item.time,
-                      annual:item.annual
+                      annual:item.isAnnual
                     })}>
-                      <Card.Title title={item.title} />
+                      <Card.Title title={item.text} />
                       <Card.Content>
-                        <Paragraph>{item.time}</Paragraph>
-                        <Text>{item.annual}</Text>
+                        <Paragraph>{moment(item.time).fromNow(true)}</Paragraph>
+                        <Text>{item.isAnnual}</Text>
                       </Card.Content>
                     </Card>
                   )
@@ -124,5 +132,33 @@ export default class CommemorationHome extends Component{
         </View>
       </PaperProvider>
     )
+  }
+  componentWillMount(){
+    Storager.getStorage('commemoration')
+      .then(res => {
+        res = res === undefined || res === ''?'[]':res;
+        this.setState({'commemorationData':JSON.parse(res)});
+        console.log(this.state.commemorationData);
+      })
+  }
+  componentDidMount(){
+    DeviceEventEmitter.addListener('handleAdd',(text,date,isAnnual) => {
+      const OutDateData = this.state.commemorationData;
+      OutDateData.push(
+        {
+          text:text,
+          date:date,
+          isAnnual:isAnnual,
+          time:moment().toDate(),
+          cid:genKey()
+        }
+      );
+      this.setState({commemorationData:OutDateData});
+      Storager.setStorage('commemoration',JSON.stringify(OutDateData));
+    });
+    DeviceEventEmitter.addListener('handleDelete');
+  }
+  componentWillUnmount(){
+    DeviceEventEmitter.removeAllListeners();
   }
 }
