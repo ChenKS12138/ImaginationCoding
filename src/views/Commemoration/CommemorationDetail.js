@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {View,Text,ScrollView,StyleSheet} from 'react-native';
+import {View,Text,ScrollView,StyleSheet,DeviceEventEmitter} from 'react-native';
 import {FAB,Avatar,Button,Card,Title,Paragraph,Drawer,Provider as PaperProvider,DefaultTheme} from 'react-native-paper';
 import moment from 'moment';
 
@@ -44,7 +44,7 @@ const theme = {
 
 export default class CommemorationDetail extends Component{
   render(){
-    const {title,anuual,time} = this.props.navigation.state.params;
+    const {title,isAnnual,time,cid,date} = this.props.navigation.state.params;
     const {goBack} = this.props.navigation;
     return(
       <PaperProvider theme={theme}>
@@ -61,7 +61,7 @@ export default class CommemorationDetail extends Component{
                 <Card 
                   style={styles.card}
                 >
-                  <Card.Title title={moment(time).format('YYYY-MM-DD')}/>
+                  <Card.Title title={moment(date).format('YYYY-MM-DD')}/>
                   <Card.Content>
                     <Paragraph>{title}</Paragraph>
                   </Card.Content>
@@ -71,7 +71,10 @@ export default class CommemorationDetail extends Component{
           <FAB
             style={styles.fab}
             icon='delete'
-            onPress={() => console.log('delete')}
+            onPress={() => {
+              DeviceEventEmitter.emit('handleDelete',cid);
+              goBack();
+            }}
           ></FAB>
         </View>
       </PaperProvider>

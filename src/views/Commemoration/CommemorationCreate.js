@@ -1,7 +1,8 @@
 import React,{Component} from 'react';
 import {View,Text,ScrollView,StyleSheet,DeviceEventEmitter} from 'react-native';
 import {TextInput,FAB,Avatar,Button,Card,Title,Paragraph,Drawer,Provider as PaperProvider,DefaultTheme,Switch} from 'react-native-paper';
-import DatePicker from 'react-native-datepicker'
+import DatePicker from 'react-native-datepicker';
+import moment from 'moment';
 
 import Welcome from '../../components/Welcome';
 import HeaderBar from '../../components/HeaderBar';
@@ -109,7 +110,7 @@ export default class CommemorationCreate extends Component{
                       marginLeft: 36
                     }
                   }}
-                  onDateChange={date => this.setState({selectedDate:date})}
+                  onDateChange={date => this.setState({selectedDate:moment(date).toDate()})}
                   style={styles.datePicker}
                 />
               </ScrollView>
@@ -119,6 +120,7 @@ export default class CommemorationCreate extends Component{
             icon='done'
             onPress={() => {
               DeviceEventEmitter.emit('handleAdd',this.state.text,this.state.selectedDate,this.state.isAnnual);
+              goBack();
             }}
           ></FAB>
         </View>

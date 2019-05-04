@@ -106,7 +106,6 @@ export default class WhisperHome extends Component{
         res = res === undefined||res === '' ?'[]':res;
         this.setState({'messageData':JSON.parse(res)});
       })
-      // .then(() => Storager.clearStorage('whisper'))
   }
   componentDidMount(){
     DeviceEventEmitter.addListener('handleAdd',text => {

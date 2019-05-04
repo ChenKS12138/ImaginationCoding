@@ -106,21 +106,31 @@ export default class CommemorationHome extends Component{
                 style={styles.ScrollView}
               >
                 <Welcome text="纪念日" />
-                {this.state.commemorationData.map((item,index) => {
-                  return(
-                    <Card style={styles.card} key={index} onPress={() => navigate('CommemorationDetail',{
-                      title:item.text,
-                      time:item.time,
-                      annual:item.isAnnual
-                    })}>
-                      <Card.Title title={item.text} />
-                      <Card.Content>
-                        <Paragraph>{moment(item.time).fromNow(true)}</Paragraph>
-                        <Text>{item.isAnnual}</Text>
-                      </Card.Content>
-                    </Card>
-                  )
-                })}
+                {
+                  this.state.commemorationData.length !==0
+                  ?
+                  this.state.commemorationData.sort((a,b) => moment(b.date).diff(a.date)).map((item,index) => {
+                    return(
+                      <Card style={styles.card} key={index} onPress={() => navigate('CommemorationDetail',{
+                        title:item.text,
+                        time:item.time,
+                        annual:item.isAnnual,
+                        cid:item.cid,
+                        date:item.date
+                      })}>
+                        <Card.Title title={item.text} />
+                        <Card.Content>
+                          <Paragraph>{moment(item.date).diff(moment().toDate()) > 0 ? '还有' + moment().to(item.date,true) + '诶': '已经过了' + moment().from(item.date,true) + '诶'}</Paragraph>
+                          <Text>{item.isAnnual}</Text>
+                        </Card.Content>
+                      </Card>
+                    )
+                  })
+                  :
+                  <View style={{flex:1,alignItems:"center",marginTop:60}}>
+                    <Text style={{fontSize:15}}>这里啥子都没有哦~ 快来记录下和TA的特殊的日子叭</Text>
+                  </View>
+                }
                 <PaddingView />
               </ScrollView>
           </View>
@@ -156,7 +166,13 @@ export default class CommemorationHome extends Component{
       this.setState({commemorationData:OutDateData});
       Storager.setStorage('commemoration',JSON.stringify(OutDateData));
     });
-    DeviceEventEmitter.addListener('handleDelete');
+    DeviceEventEmitter.addListener('handleDelete',cid => {
+      const OutDateData = this.state.commemorationData;
+      const targetIndex = OutDateData.findIndex(item => item.cid === cid);
+      OutDateData.splice(targetIndex,1);
+      this.setState({'commemorationData':OutDateData});
+      Storager.setStorage('whisper',JSON.stringify(OutDateData));
+    });
   }
   componentWillUnmount(){
     DeviceEventEmitter.removeAllListeners();
