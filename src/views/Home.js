@@ -43,16 +43,15 @@ export default class Home extends Component{
       <ColorBar />
       <HeaderBar
         iconType="menu"
-        text="home"
+        text="主页"
         onPress={() => this.props.navigation.toggleDrawer()}
       />
         <View style={styles.container}>
-          {/* <StatusBar style ={styles.statusBar} translucent={true} backgroundColor='#1874CD' /> */}
           <View style={styles.home} >
             <ScrollView
               showsVerticalScrollIndicator={false}
             >
-              <Welcome text="欢迎" />
+              <Welcome text="Home" />
               <Whisper onPress={() => navigate('Whisper')}/>
               <Album onPress={() => navigate('Album')}/>
               <Scheme onPress={() => navigate('Scheme')}/>

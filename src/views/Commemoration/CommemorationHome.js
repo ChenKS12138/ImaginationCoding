@@ -105,7 +105,7 @@ export default class CommemorationHome extends Component{
                 showsVerticalScrollIndicator={false}
                 style={styles.ScrollView}
               >
-                <Welcome text="纪念日" />
+                <Welcome text="commemoration" />
                 {
                   this.state.commemorationData.length !==0
                   ?
@@ -148,7 +148,6 @@ export default class CommemorationHome extends Component{
       .then(res => {
         res = res === undefined || res === ''?'[]':res;
         this.setState({'commemorationData':JSON.parse(res)});
-        console.log(this.state.commemorationData);
       })
   }
   componentDidMount(){

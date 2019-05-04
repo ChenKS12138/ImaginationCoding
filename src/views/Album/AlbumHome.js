@@ -101,7 +101,7 @@ export default class SchemeHome extends Component{
               <ScrollView
                 showsVerticalScrollIndicator={false}
               >
-                <Welcome text="照片时光机" />
+                <Welcome text="Album" />
                 {fakeData.map((item,index) => {
                   return(
                     <Card

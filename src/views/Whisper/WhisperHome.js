@@ -65,7 +65,7 @@ export default class WhisperHome extends Component{
               <ScrollView
                 showsVerticalScrollIndicator={false}
               >
-                <Welcome text="悄悄话" />
+                <Welcome text="Whisper" />
                 {
                   this.state.messageData.length!==0
                   ?

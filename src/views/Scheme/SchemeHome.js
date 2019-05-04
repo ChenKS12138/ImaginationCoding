@@ -82,7 +82,7 @@ export default class SchemeHome extends Component{
               <ScrollView
                 showsVerticalScrollIndicator={false}
               >
-                <Welcome text="恋爱打卡" />
+                <Welcome text="Scheme" />
                 {
                   this.state.schemeData.length !== 0
                   ?
@@ -125,7 +125,6 @@ export default class SchemeHome extends Component{
     Storager.getStorage('scheme')
       .then(res =>{
         this.setState({schemeData:res === undefined || ''?[]:JSON.parse(res)});
-        console.log(this.state.schemeData,typeof(this.state.schemeData));
       });
   }
   componentDidMount(){

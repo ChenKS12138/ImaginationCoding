@@ -40,7 +40,7 @@ export default class Whisper extends Component{
         <HeaderBar iconType="menu" text="关于" onPress={() => NavigationService.toggleDrawer()}/>
         <View style={styles.container}>
             <View style={styles.whisper}>
-              <Welcome text="关于" />
+              <Welcome text="About" />
               <ScrollView>
                 <Text>
                   作为一位敬仰着小 b 同学的萌新，小 z 一直在钻研如何让自己的代码变得

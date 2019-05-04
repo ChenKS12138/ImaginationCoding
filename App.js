@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {StyleSheet,ScrollView,Text,View} from 'react-native';
 import {createStackNavigator,createDrawerNavigator,createAppContainer,DrawerItems, SafeAreaView} from 'react-navigation';
 import NavigationService from './src/utils/NavigationService'; 
+import {Avatar,Button} from 'react-native-paper';
 
 import Home from './src/views/Home';
 import Whisper from './src/views/Whisper/Whisper';
@@ -28,27 +29,52 @@ const DrawerNavigatior = createDrawerNavigator(
   {
     Home:{
       screen:Home,
-      path:'/'
+      path:'/',
+      navigationOptions:{
+        drawerLabel:`主页`
+      }
     },
     Whisper:{
       screen:Whisper,
-      path:'/whisper'
+      path:'/whisper',
+      navigationOptions:{
+        drawerLabel:`悄悄话`
+      }
     },
     Album:{
       screen:Album,
-      path:'/album'
+      path:'/album',
+      navigationOptions:{
+        drawerLabel:`照片时光机`
+      }
     },
     Scheme:{
       screen:Scheme,
-      path:'/scheme'
+      path:'/scheme',
+      navigationOptions:{
+        drawerLabel:`恋爱打卡`
+      }
     },
     Commemoration:{
       screen:Commemoration,
-      path:'/commemoration'
+      path:'/commemoration',
+      navigationOptions:{
+        drawerLabel:`纪念日`
+      }
+    },
+    Plan:{
+      screen:About,
+      path:'/plan',
+      navigationOptions:{
+        drawerLabel:`和Ta的100件事`
+      }
     },
     About:{
       screen:About,
-      path:'/about'
+      path:'/about',
+      navigationOptions:{
+        drawerLabel:`关于`
+      }
     }
   },
   {
