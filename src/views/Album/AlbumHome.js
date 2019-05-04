@@ -97,7 +97,6 @@ export default class SchemeHome extends Component{
           onPress={() => NavigationService.toggleDrawer()}
         />
         <View style={styles.container}>
-          {/* <StatusBar style ={styles.statusBar} translucent={true} backgroundColor='#1874CD' /> */}
             <View style={styles.album}>
               <ScrollView
                 showsVerticalScrollIndicator={false}

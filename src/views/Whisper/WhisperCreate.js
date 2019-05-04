@@ -1,10 +1,11 @@
 import React,{Component} from 'react';
-import {View,Text,ScrollView,StyleSheet} from 'react-native';
+import {View,Text,ScrollView,StyleSheet,DeviceEventEmitter} from 'react-native';
 import {TextInput,FAB,Avatar,Button,Card,Title,Paragraph,Drawer,Provider as PaperProvider,DefaultTheme} from 'react-native-paper';
 
 import Welcome from '../../components/Welcome';
 import HeaderBar from '../../components/HeaderBar';
 import ColorBar from '../../components/ColorBar';
+import Storager from '../../api/Storager';
 
 const styles = StyleSheet.create({
   container: {
@@ -75,7 +76,12 @@ export default class WhisperCreate extends Component{
           <FAB
             style={styles.fab}
             icon='done'
-            onPress={() => goBack()}
+            onPress={() => {
+              if(this.state.text){
+                DeviceEventEmitter.emit('handleAdd',this.state.text);
+                goBack();
+              }
+            }}
           ></FAB>
         </View>
       </PaperProvider>

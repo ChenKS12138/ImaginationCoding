@@ -9,7 +9,9 @@
     "log": "react-native log-android"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.3.4",
     "moment": "^2.24.0",
+    "randomstring": "^1.1.5",
     "react": "16.8.3",
     "react-native": "0.59.5",
     "react-native-datepicker": "^1.7.2",

@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {View,Text,ScrollView,StyleSheet} from 'react-native';
+import {View,Text,ScrollView,StyleSheet,DeviceEventEmitter} from 'react-native';
 import {TextInput,FAB,Avatar,Button,Card,Title,Paragraph,Drawer,Provider as PaperProvider,DefaultTheme} from 'react-native-paper';
 
 import Welcome from '../../components/Welcome';
@@ -28,6 +28,9 @@ const styles = StyleSheet.create({
   card:{
     marginTop:5,
     marginBottom:5
+  },
+  input:{
+    backgroundColor:'#F5FCFF'
   }
 })
 
@@ -64,13 +67,17 @@ export default class SchemeCreate extends Component{
                   label='请写下打卡任务的内容'
                   value={this.state.text}
                   onChangeText={text => this.setState({text})}
+                  style={styles.input}
                 />
               </ScrollView>
           </View>
           <FAB
             style={styles.fab}
             icon='done'
-            onPress={() => goBack()}
+            onPress={() => {
+              DeviceEventEmitter.emit('handleAdd',this.state.text);
+              goBack();
+            }}
           ></FAB>
         </View>
       </PaperProvider>

@@ -14,7 +14,7 @@ export default class SchemeEntrance extends Component{
     const {onPress} = this.props;
     return(
       <Card style={styles.card} onPress={onPress}>
-        <Card.Title title="恋爱打卡" left={(props) => <Avatar.Icon {...props} icon="check" />} />
+        <Card.Title title="恋爱打卡" left={(props) => <Avatar.Icon {...props} icon="check" color="white" />} />
         <Card.Content>
           <Paragraph>恋爱打卡的subtitle</Paragraph>
         </Card.Content>

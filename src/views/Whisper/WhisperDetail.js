@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
-import {View,Text,ScrollView,StyleSheet} from 'react-native';
+import {View,Text,ScrollView,StyleSheet,DeviceEventEmitter} from 'react-native';
 import {FAB,Avatar,Button,Card,Title,Paragraph,Drawer,Provider as PaperProvider,DefaultTheme} from 'react-native-paper';
+import moment from 'moment';
 
 import Welcome from '../../components/Welcome';
 import HeaderBar from '../../components/HeaderBar';
@@ -43,7 +44,7 @@ const theme = {
 
 export default class WhisperDetail extends Component{
   render(){
-    const {text,time} = this.props.navigation.state.params;
+    const {text,time,mid} = this.props.navigation.state.params;
     const {goBack} = this.props.navigation;
     return(
       <PaperProvider theme={theme}>
@@ -61,7 +62,7 @@ export default class WhisperDetail extends Component{
                 <Card 
                   style={styles.card}
                 >
-                  <Card.Title title={time}/>
+                  <Card.Title title={moment(time).format('YYYY-MM-DD')}/>
                   <Card.Content>
                     <Paragraph>{text}</Paragraph>
                   </Card.Content>
@@ -71,7 +72,10 @@ export default class WhisperDetail extends Component{
           <FAB
             style={styles.fab}
             icon='delete'
-            onPress={() => console.log('delete')}
+            onPress={() => {
+              DeviceEventEmitter.emit('handleDelete',mid);
+              goBack();
+            }}
           ></FAB>
         </View>
       </PaperProvider>

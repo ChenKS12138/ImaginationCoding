@@ -11,13 +11,15 @@ const styles = StyleSheet.create({
 
 export default class CommonButton extends Component{
   render(){
-    const {icon,text,onPress} = this.props;
+    const {icon,text,onPress,disabled=false} = this.props;
     return(
       <Button
         icon={icon}
         onPress={onPress}
         mode="contained"
         style={styles.btn}
+        dark={true}
+        disabled={disabled}
       >
         {text}
       </Button>

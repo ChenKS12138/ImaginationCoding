@@ -1,8 +1,7 @@
 import React,{Component} from 'react';
 import {View,Text,ScrollView,StyleSheet} from 'react-native';
-import {TextInput,FAB,Avatar,Button,Card,Title,Paragraph,Drawer,Provider as PaperProvider,DefaultTheme} from 'react-native-paper';
+import {TextInput,FAB,Avatar,Button,Card,Title,Paragraph,Drawer,Provider as PaperProvider,DefaultTheme,Switch} from 'react-native-paper';
 import DatePicker from 'react-native-datepicker'
-
 
 import Welcome from '../../components/Welcome';
 import HeaderBar from '../../components/HeaderBar';
@@ -30,6 +29,19 @@ const styles = StyleSheet.create({
   card:{
     marginTop:5,
     marginBottom:5
+  },
+  input:{
+    backgroundColor:'#F5FCFF',
+    marginTop:10
+  },
+  datePicker:{
+    marginTop:30
+  },
+  switchArea:{
+    display:'flex',
+    flexDirection:'row',
+    alignItems:'center',
+    marginTop:30
   }
 })
 
@@ -47,10 +59,12 @@ export default class CommemorationCreate extends Component{
   state={
     text:'',
     datePickerVisible:false,
-    selectedDate:new Date()
+    selectedDate:new Date(),
+    isAnnual:true
   };
   render(){
     const {navigate,goBack} = this.props.navigation;
+    const {isAnnual} = this.state;
     return(
       <PaperProvider theme={theme}>
         <ColorBar />
@@ -60,7 +74,6 @@ export default class CommemorationCreate extends Component{
           onPress={() => goBack()}
         />
         <View style={styles.container}>
-          {/* <StatusBar style ={styles.statusBar} translucent={true} backgroundColor='#1874CD' /> */}
             <View style={styles.commemoration}>
               <Welcome text="新的纪念日" />
               <ScrollView>
@@ -68,7 +81,19 @@ export default class CommemorationCreate extends Component{
                   label='请写下纪念日的内容'
                   value={this.state.text}
                   onChangeText={text => this.setState({text})}
+                  style={styles.input}
+                  multiline={true}
                 />
+                <View style={styles.switchArea}>
+                  <Text>这是每年都有的纪念日吗</Text>  
+                  <Switch 
+                    value={isAnnual}
+                    onValueChange={() => {
+                      this.setState({isAnnual:!isAnnual});
+                    }}
+                    color="pink"
+                  />
+                </View>
                 <DatePicker 
                   mode="date"
                   date={this.state.selectedDate}
@@ -85,6 +110,7 @@ export default class CommemorationCreate extends Component{
                     }
                   }}
                   onDateChange={date => this.setState({selectedDate:date})}
+                  style={styles.datePicker}
                 />
               </ScrollView>
           </View>

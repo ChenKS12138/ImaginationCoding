@@ -7,11 +7,11 @@ import Welcome from '../../components/Welcome';
 import ColorBar from '../../components/ColorBar';
 import HeaderBar from '../../components/HeaderBar';
 
+import fengling from '../../assets/img/img0.jpg';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 30,
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'center',
@@ -30,6 +30,10 @@ const styles = StyleSheet.create({
   card:{
     marginTop:5,
     marginBottom:5
+  },
+  btn:{
+    marginTop:60,
+    color:'white'
   }
 })
 
@@ -70,12 +74,17 @@ export default class AlbumCreate extends Component{
             <View style={styles.album}>
               <Welcome text="新的照片" />
               <ScrollView>
-                <Text>
-                  快来记录下和Ta的点点滴滴吧
-                </Text>
+                <Card
+                  style={styles.card}
+                >
+                  <Card.Title title="快来记录下和Ta的点点滴滴吧~"/>
+                  <Card.Cover source={fengling}/>
+                </Card>
                 <Button
                   icon="add-a-photo"
                   mode="contained"
+                  style={styles.btn}
+                  color="#1874CD"
                   onPress={
                     async () => {
                       try {
