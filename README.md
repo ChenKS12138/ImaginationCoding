@@ -3,4 +3,7 @@
 ##我该怎么运行这个项目？
 ###如果是需要调试这个项目
 首先需要确保本地安装有Node.js以及 npm 或 yarn。
+先执行`npm install`或`yarn install`
 确保有打开USB调式模式的安卓设备连接到此电脑或者打开安卓虚拟机。运行`npm run android` 即可在设备中预览这个项目。运行`npm run log`可以查看日志。
+###如果是需要查看最终的结果
+我已经将APK打包好了，在example目录下`/example/app-release.apk`，将其安装到设备中即可
