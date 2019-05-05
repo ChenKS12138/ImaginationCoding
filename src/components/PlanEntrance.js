@@ -16,7 +16,7 @@ export default class WhisperEntrance extends Component{
       <Card style ={styles.card} onPress={onPress}>
         <Card.Title title="和Ta约好的事" left={(props) => <Avatar.Icon {...props} icon="mood" color="white" />} />
         <Card.Content>
-          <Paragraph>悄悄话的subtitle</Paragraph>
+          <Paragraph>说好的事就要做到</Paragraph>
         </Card.Content>
       </Card>
     )

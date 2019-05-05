@@ -56,8 +56,8 @@ export default class Home extends Component{
               <Welcome text="Home" />
               <Whisper onPress={() => navigate('Whisper')}/>
               <Album onPress={() => navigate('Album')}/>
-              <Plan onPress={() => navigate('Plan')}/>
               <Scheme onPress={() => navigate('Scheme')}/>
+              <Plan onPress={() => navigate('Plan')}/>
               <Commemoration onPress={() => navigate('Commemoration')}/>
               <PaddingView />
             </ScrollView>

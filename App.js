@@ -56,18 +56,18 @@ const DrawerNavigatior = createDrawerNavigator(
         drawerLabel:`恋爱打卡`
       }
     },
-    Commemoration:{
-      screen:Commemoration,
-      path:'/commemoration',
-      navigationOptions:{
-        drawerLabel:`纪念日`
-      }
-    },
     Plan:{
       screen:Plan,
       path:'/plan',
       navigationOptions:{
         drawerLabel:`和Ta约好的事`
+      }
+    },
+    Commemoration:{
+      screen:Commemoration,
+      path:'/commemoration',
+      navigationOptions:{
+        drawerLabel:`纪念日`
       }
     },
     About:{
