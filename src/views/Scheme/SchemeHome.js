@@ -14,11 +14,11 @@ import NavigationService from '../../utils/NavigationService';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 30,
+    paddingTop: 5,
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#FFFAFA',
   },
   fab:{
     position:'absolute',
@@ -45,23 +45,6 @@ const theme = {
     accent: '#f1c40f',
   }
 };
-
-const fakeData= [
-  {
-    title:'每天和TA在一起',
-    timeList:[
-      moment().set('date',2).format('x'),
-      moment().set('date',1).format('x')
-    ]
-  },
-  {
-    title:'哈哈233',
-    timeList:[
-      moment().set('date',2).format('x'),
-      moment().set('date',1).format('x')
-    ]
-  }
-]
 
 export default class SchemeHome extends Component{
   state={

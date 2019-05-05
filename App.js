@@ -9,6 +9,7 @@ import Whisper from './src/views/Whisper/Whisper';
 import Commemoration from './src/views/Commemoration/Commemoration';
 import Album from './src/views/Album/Album';
 import Scheme from './src/views/Scheme/Scheme';
+import Plan from './src/views/Plan/Plan';
 import About from './src/views/About/About';
 
 const styles = StyleSheet.create({
@@ -63,10 +64,10 @@ const DrawerNavigatior = createDrawerNavigator(
       }
     },
     Plan:{
-      screen:About,
+      screen:Plan,
       path:'/plan',
       navigationOptions:{
-        drawerLabel:`和Ta的100件事`
+        drawerLabel:`和Ta约好的事`
       }
     },
     About:{

@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import {View,Text,ScrollView,StyleSheet,DeviceEventEmitter} from 'react-native';
-import {FAB,Avatar,Button,Card,Title,Paragraph,Drawer,Provider as PaperProvider,DefaultTheme} from 'react-native-paper';
+import {Portal,Dialog,FAB,Avatar,Button,Card,Title,Paragraph,Drawer,Provider as PaperProvider,DefaultTheme} from 'react-native-paper';
 import moment from 'moment';
 
 import Welcome from '../../components/Welcome';
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#FFFAFA',
   },
   fab:{
     position:'absolute',
@@ -46,7 +46,8 @@ const theme = {
 export default class SchemeDetail extends Component{
   state={
     count:0,
-    disabled:false
+    disabled:false,
+    visible:false
   }
   render(){
     const {title,sid} = this.props.navigation.state.params;
@@ -61,7 +62,7 @@ export default class SchemeDetail extends Component{
         />
         <View style={styles.container}>
             <View style={styles.scheme}>
-              <Welcome text="纪念日详情" />
+              <Welcome text="计划详情" />
               <ScrollView>
                 <Card 
                   style={styles.card}
@@ -82,13 +83,30 @@ export default class SchemeDetail extends Component{
                   }}
                 />
               </ScrollView>
+            <Portal>
+              <Dialog
+                visible={this.state.visible}
+                onDismiss={() => this.setState({visible:!this.state.visible})}>
+                <Dialog.Title>确认要删除吗?</Dialog.Title>
+                <Dialog.Content>
+                  <Paragraph>一旦删除就，无法在找回</Paragraph>
+                </Dialog.Content>
+                <Dialog.Actions>
+                  <Button color="grey" style={{marginRight:20}} onPress={() => this.setState({visible:!this.state.visible})}>取消</Button>
+                  <Button color="red" onPress={() => {
+                    this.setState({visible:!this.state.visible});
+                    DeviceEventEmitter.emit('handleSchemeDelete',sid);
+                    goBack();
+                  }}>是的</Button>
+                </Dialog.Actions>
+              </Dialog>
+            </Portal>
           </View>
           <FAB
             style={styles.fab}
             icon='delete'
             onPress={() => {
-              DeviceEventEmitter.emit('handleSchemeDelete',sid);
-              goBack();
+              this.setState({visible:!this.state.visible});
             }}
           ></FAB>
         </View>

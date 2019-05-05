@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+    backgroundColor: '#FFFAFA'
   },
   fab:{
     position:'absolute',
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     marginBottom:5
   },
   ScrollView:{
-    paddingTop: 30,
+    paddingTop: 5,
     paddingBottom: 30,
   }
 })
@@ -51,39 +51,6 @@ const theme = {
     accent: '#f1c40f',
   }
 };
-
-const fakeData= [
-  {
-    title:'TA的生日',
-    annual:true,
-    time:'很久之前'
-  },
-  {
-    title:'认识多少天',
-    annual:false,
-    time:'就刚刚'
-  },
-  {
-    title:'TA的生日',
-    annual:true,
-    time:'很久之前'
-  },
-  {
-    title:'认识多少天',
-    annual:false,
-    time:'就刚刚'
-  },
-  {
-    title:'TA的生日',
-    annual:true,
-    time:'很久之前'
-  },
-  {
-    title:'认识多少天',
-    annual:false,
-    time:'就刚刚'
-  }
-]
 
 export default class CommemorationHome extends Component{
   state={
@@ -114,14 +81,13 @@ export default class CommemorationHome extends Component{
                       <Card style={styles.card} key={index} onPress={() => navigate('CommemorationDetail',{
                         title:item.text,
                         time:item.time,
-                        annual:item.isAnnual,
+                        isAnnual:item.isAnnual,
                         cid:item.cid,
                         date:item.date
                       })}>
                         <Card.Title title={item.text} />
                         <Card.Content>
-                          <Paragraph>{moment(item.date).diff(moment().toDate()) > 0 ? '还有' + moment().to(item.date,true) + '诶': '已经过了' + moment().from(item.date,true) + '诶'}</Paragraph>
-                          <Text>{item.isAnnual}</Text>
+                          <Paragraph>{item.isAnnual ===false?moment(item.date).diff(moment().toDate()) > 0 ? '还有' + moment().to(item.date,true) + '诶': '已经过了' + moment().from(item.date,true) + '诶':'还有' + moment().to(item.date,true) + '诶'}</Paragraph>
                         </Card.Content>
                       </Card>
                     )
@@ -170,7 +136,7 @@ export default class CommemorationHome extends Component{
       const targetIndex = OutDateData.findIndex(item => item.cid === cid);
       OutDateData.splice(targetIndex,1);
       this.setState({'commemorationData':OutDateData});
-      Storager.setStorage('whisper',JSON.stringify(OutDateData));
+      Storager.setStorage('commemoration',JSON.stringify(OutDateData));
     });
   }
   componentWillUnmount(){

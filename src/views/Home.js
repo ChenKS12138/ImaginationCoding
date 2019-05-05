@@ -7,9 +7,11 @@ import Welcome from '../components/Welcome';
 import Whisper from '../components/WhisperEntrance';
 import Album from '../components/AlbumEntrance';
 import Scheme from '../components/SchemeEntrance';
+import Plan from '../components/PlanEntrance';
 import Commemoration from '../components/CommemorationEntrance';
 import HeaderBar from '../components/HeaderBar';
 import ColorBar from '../components/ColorBar';
+import PaddingView from '../components/PaddingView';
 
 const theme = {
   ...DefaultTheme,
@@ -31,7 +33,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#FFFAFA',
   }
 });
 
@@ -54,8 +56,10 @@ export default class Home extends Component{
               <Welcome text="Home" />
               <Whisper onPress={() => navigate('Whisper')}/>
               <Album onPress={() => navigate('Album')}/>
+              <Plan onPress={() => navigate('Plan')}/>
               <Scheme onPress={() => navigate('Scheme')}/>
               <Commemoration onPress={() => navigate('Commemoration')}/>
+              <PaddingView />
             </ScrollView>
           </View>
         </View>

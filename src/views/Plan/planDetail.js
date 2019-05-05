@@ -4,8 +4,8 @@ import {Portal,Dialog,FAB,Avatar,Button,Card,Title,Paragraph,Drawer,Provider as 
 import moment from 'moment';
 
 import Welcome from '../../components/Welcome';
-import ColorBar from '../../components/ColorBar';
 import HeaderBar from '../../components/HeaderBar';
+import ColorBar from '../../components/ColorBar';
 
 const styles = StyleSheet.create({
   container: {
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     top:420,
     backgroundColor:'red'
   },
-  album:{
+  plan:{
     width:300
   },
   card:{
@@ -42,63 +42,52 @@ const theme = {
   }
 };
 
-export default class AlbumDetail extends Component{
+export default class WhisperDetail extends Component{
   state={
     visible:false
   }
   render(){
-    const {image=null,time='刚刚',description='这是照片',fileName=null} = this.props.navigation.state.params;
+    const {text,time} = this.props.navigation.state.params;
     const {goBack} = this.props.navigation;
     return(
       <PaperProvider theme={theme}>
         <ColorBar />
-        <HeaderBar 
+        <HeaderBar
+          text="约好的事详情"
           iconType="back"
-          text="照片详情"
           onPress={() => goBack()}
         />
         <View style={styles.container}>
-            <View style={styles.album}>
-              <Welcome text="照片详情" />
+            <View style={styles.plan}>
+              <Welcome text="约好的事详情" />
               <ScrollView>
-                <Card
+                <Card 
                   style={styles.card}
                 >
-                  <Card.Title title={description}/>
-                  <Card.Cover 
-                    source={image}
-                  />
+                  <Card.Title title={text}/>
                   <Card.Content>
-                    <Paragraph>{description}</Paragraph>
                     <Paragraph>{moment(time).format('YYYY-MM-DD')}</Paragraph>
                   </Card.Content>
                 </Card>
               </ScrollView>
-            <Portal>
-              <Dialog
-                visible={this.state.visible}
-                onDismiss={() => this.setState({visible:!this.state.visible})}>
-                <Dialog.Title>确认要删除吗?</Dialog.Title>
-                <Dialog.Content>
-                  <Paragraph>一旦删除就，无法在找回</Paragraph>
-                </Dialog.Content>
-                <Dialog.Actions>
-                  <Button color="grey" style={{marginRight:20}} onPress={() => this.setState({visible:!this.state.visible})}>取消</Button>
-                  <Button color="red" onPress={() => {
-                    this.setState({visible:!this.state.visible});
-                    DeviceEventEmitter.emit('handleAlbumDelete',fileName);
-                    goBack();
-                  }}>是的</Button>
-                </Dialog.Actions>
-              </Dialog>
-            </Portal>
+              <Portal>
+                <Dialog
+                  visible={this.state.visible}
+                  onDismiss={() => this.setState({visible:!this.state.visible})}>
+                  <Dialog.Title>我想删除</Dialog.Title>
+                  <Dialog.Content>
+                    <Paragraph>说好的事就要做到呢~ 怎么能删除呢</Paragraph>
+                  </Dialog.Content>
+                  <Dialog.Actions>
+                    <Button color="green" onPress={() => this.setState({visible:!this.state.visible})}>我错了,我会坚持下去的</Button>
+                  </Dialog.Actions>
+                </Dialog>
+              </Portal>
           </View>
           <FAB
             style={styles.fab}
             icon='delete'
-            onPress={() => {
-              this.setState({visible:!this.state.visible});
-            }}
+            onPress={() => this.setState({visible:!this.state.visible})}
           ></FAB>
         </View>
       </PaperProvider>

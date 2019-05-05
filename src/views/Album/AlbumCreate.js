@@ -3,6 +3,7 @@ import {View,Text,ScrollView,StyleSheet,PermissionsAndroid,DeviceEventEmitter} f
 import {TextInput,FAB,Avatar,Button,Card,Title,Paragraph,Drawer,Provider as PaperProvider,DefaultTheme} from 'react-native-paper';
 import ImagePicker from 'react-native-image-picker';
 import RNFS from 'react-native-fs';
+import ImageResizer from 'react-native-image-resizer';
 
 import Welcome from '../../components/Welcome';
 import ColorBar from '../../components/ColorBar';
@@ -16,7 +17,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#FFFAFA',
   },
   fab:{
     position:'absolute',
@@ -34,10 +35,13 @@ const styles = StyleSheet.create({
   },
   btn:{
     marginTop:60,
-    color:'white'
+    color:'white',
+    height:50,
+    display: 'flex',
+    alignItems:'center'
   },
   input:{
-    backgroundColor:'#F5FCFF'
+    backgroundColor:'transparent'
   }
 })
 
@@ -99,6 +103,7 @@ export default class AlbumCreate extends Component{
                   mode="contained"
                   style={styles.btn}
                   color="#1874CD"
+                  contentStyle={{fontSize:40}}
                   onPress={
                     async () => {
                       try {
@@ -131,7 +136,11 @@ export default class AlbumCreate extends Component{
                               console.log('cancle');
                             }
                             else{
-                              this.setState({imgSource:{uri:'data:image/jpg;base64,'+response.data},rawImg:response.data})
+                              ImageResizer.createResizedImage('data:image/jpeg;base64,'+response.data,1800,1600,'JPEG',70)
+                                .then(async resizeResponse => {
+                                  const resizeData = await RNFS.readFile(resizeResponse.path,'base64');
+                                  this.setState({imgSource:{uri:'data:image/jpg;base64,'+resizeData},rawImg:resizeData})
+                                })
                             }
                           })
                         }
@@ -142,7 +151,7 @@ export default class AlbumCreate extends Component{
                     }
                   }
                 >
-                  点击我选择照片
+                  <Text>点击我选择照片</Text>
                 </Button>
               </ScrollView>
           </View>

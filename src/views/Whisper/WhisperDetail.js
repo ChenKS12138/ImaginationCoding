@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import {View,Text,ScrollView,StyleSheet,DeviceEventEmitter} from 'react-native';
-import {FAB,Avatar,Button,Card,Title,Paragraph,Drawer,Provider as PaperProvider,DefaultTheme} from 'react-native-paper';
+import {Portal,Dialog,FAB,Avatar,Button,Card,Title,Paragraph,Drawer,Provider as PaperProvider,DefaultTheme} from 'react-native-paper';
 import moment from 'moment';
 
 import Welcome from '../../components/Welcome';
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#FFFAFA',
   },
   fab:{
     position:'absolute',
@@ -43,6 +43,9 @@ const theme = {
 };
 
 export default class WhisperDetail extends Component{
+  state={
+    visible:false
+  }
   render(){
     const {text,time,mid} = this.props.navigation.state.params;
     const {goBack} = this.props.navigation;
@@ -55,7 +58,6 @@ export default class WhisperDetail extends Component{
           onPress={() => goBack()}
         />
         <View style={styles.container}>
-          {/* <StatusBar style ={styles.statusBar} translucent={true} backgroundColor='#1874CD' /> */}
             <View style={styles.whisper}>
               <Welcome text="悄悄话详情" />
               <ScrollView>
@@ -68,13 +70,30 @@ export default class WhisperDetail extends Component{
                   </Card.Content>
                 </Card>
               </ScrollView>
+              <Portal>
+                <Dialog
+                  visible={this.state.visible}
+                  onDismiss={() => this.setState({visible:!this.state.visible})}>
+                  <Dialog.Title>确认要删除吗?</Dialog.Title>
+                  <Dialog.Content>
+                    <Paragraph>一旦删除就，无法在找回</Paragraph>
+                  </Dialog.Content>
+                  <Dialog.Actions>
+                    <Button color="grey" style={{marginRight:20}} onPress={() => this.setState({visible:!this.state.visible})}>取消</Button>
+                    <Button color="red" onPress={() => {
+                      this.setState({visible:!this.state.visible});
+                      DeviceEventEmitter.emit('handleWhisperDelete',mid);
+                      goBack();
+                    }}>是的</Button>
+                  </Dialog.Actions>
+                </Dialog>
+              </Portal>
           </View>
           <FAB
             style={styles.fab}
             icon='delete'
             onPress={() => {
-              DeviceEventEmitter.emit('handleWhisperDelete',mid);
-              goBack();
+              this.setState({visible:!this.state.visible});
             }}
           ></FAB>
         </View>

@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#FFFAFA',
   },
   fab:{
     position:'absolute',
@@ -49,43 +49,6 @@ const theme = {
     accent: '#f1c40f',
   }
 };
-
-const fakeData= [
-  {
-    title:'风铃',
-    img:img0,
-    time:'刚刚',
-    description:'风铃'
-  },
-  {
-    title:'猫咪mua',
-    img:img2,
-    time:'刚刚',
-    description:'猫咪mua'
-  },
-  {
-    title:'风铃',
-    img:img0,
-    time:'刚刚',
-    description:'风铃'
-  },
-  {
-    title:'猫咪mua',
-    img:img2,
-    time:'刚刚',
-    description:'猫咪'
-  },
-  {
-    title:'风铃',
-    img:img0,
-    time:'刚刚'
-  },
-  {
-    title:'猫咪mua',
-    img:img2,
-    time:'刚刚'
-  }
-]
 
 export default class SchemeHome extends Component{
   state={
@@ -149,7 +112,7 @@ export default class SchemeHome extends Component{
     Storager.getStorage('album')
       .then(res => {
         res = res === undefined||res === '' ?[]:JSON.parse(res);
-        this.setState({imageData:res.map(item => {return{fileName:item.fileName,imgSource:img0}})});
+        this.setState({imageData:res.map(item => {return{fileName:item.fileName,imgSource:null}})});
         this.setState({albumData:res});
         Promise.all(
           res.map(item => RNFS.readFile(RNFS.DocumentDirectoryPath+`/${item.fileName}.jpg`))
@@ -161,7 +124,7 @@ export default class SchemeHome extends Component{
             this.setState({imageData:ImageSource});
           })
       });
-    RNFS.readDir(RNFS.DocumentDirectoryPath).then(res => console.log(res));
+    // RNFS.readDir(RNFS.DocumentDirectoryPath).then(res => console.log(res));
   }
   componentDidMount(){
     DeviceEventEmitter.addListener('handleAlbumAdd',(imgSource,description) => {

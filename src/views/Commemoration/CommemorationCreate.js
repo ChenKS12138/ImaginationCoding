@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#FFFAFA',
   },
   fab:{
     position:'absolute',
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     marginBottom:5
   },
   input:{
-    backgroundColor:'#F5FCFF',
+    backgroundColor:'transparent',
     marginTop:10
   },
   datePicker:{
@@ -92,7 +92,7 @@ export default class CommemorationCreate extends Component{
                     onValueChange={() => {
                       this.setState({isAnnual:!isAnnual});
                     }}
-                    color="pink"
+                    color="#1874CD"
                   />
                 </View>
                 <DatePicker 

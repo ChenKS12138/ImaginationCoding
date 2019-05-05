@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: 'transparent',
   },
   fab:{
     position:'absolute',
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     marginBottom:5
   },
   input:{
-    backgroundColor:'#F5FCFF'
+    backgroundColor:'transparent'
   }
 })
 
