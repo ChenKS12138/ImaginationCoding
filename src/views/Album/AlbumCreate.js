@@ -1,7 +1,8 @@
 import React,{Component} from 'react';
-import {View,Text,ScrollView,StyleSheet,PermissionsAndroid} from 'react-native';
+import {View,Text,ScrollView,StyleSheet,PermissionsAndroid,DeviceEventEmitter} from 'react-native';
 import {TextInput,FAB,Avatar,Button,Card,Title,Paragraph,Drawer,Provider as PaperProvider,DefaultTheme} from 'react-native-paper';
 import ImagePicker from 'react-native-image-picker';
+import RNFS from 'react-native-fs';
 
 import Welcome from '../../components/Welcome';
 import ColorBar from '../../components/ColorBar';
@@ -34,6 +35,9 @@ const styles = StyleSheet.create({
   btn:{
     marginTop:60,
     color:'white'
+  },
+  input:{
+    backgroundColor:'#F5FCFF'
   }
 })
 
@@ -58,7 +62,9 @@ const pickerOptions = {
 
 export default class AlbumCreate extends Component{
   state={
-    
+    imgSource:null,
+    description:"",
+    rawImg:null,
   };
   render(){
     const {goBack} = this.props.navigation;
@@ -72,14 +78,22 @@ export default class AlbumCreate extends Component{
         />
         <View style={styles.container}>
             <View style={styles.album}>
+              <ScrollView
+                showsVerticalScrollIndicator={false}
+              >
               <Welcome text="新的照片" />
-              <ScrollView>
                 <Card
                   style={styles.card}
                 >
                   <Card.Title title="快来记录下和Ta的点点滴滴吧~"/>
-                  <Card.Cover source={fengling}/>
+                  <Card.Cover source={this.state.imgSource}/>
                 </Card>
+                <TextInput 
+                  label="描述"
+                  value={this.state.description}
+                  onChangeText={text => this.setState({description:text})}
+                  style={styles.input}
+                />
                 <Button
                   icon="add-a-photo"
                   mode="contained"
@@ -109,11 +123,21 @@ export default class AlbumCreate extends Component{
                           PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE
                         )
 
-                        ImagePicker.showImagePicker(pickerOptions,(response) => {
-                          console.log(response); //response是整个文件的数据
-                        })
+                        if(grantedCamera===PermissionsAndroid.RESULTS.GRANTED&&grantedWrite===grantedCamera&&grantedRead===grantedCamera){
+                          ImagePicker.showImagePicker(pickerOptions,(response) => {
+                            const {didCancel=null,data=null} = response;
+                            // console.log(response); //response是整个文件的数据
+                            if(didCancel===true){
+                              console.log('cancle');
+                            }
+                            else{
+                              this.setState({imgSource:{uri:'data:image/jpg;base64,'+response.data},rawImg:response.data})
+                            }
+                          })
+                        }
+                        
                       } catch (err) {
-                        console.warn(err);
+                        console.log(err);
                       }
                     }
                   }
@@ -125,10 +149,16 @@ export default class AlbumCreate extends Component{
           <FAB
             style={styles.fab}
             icon='done'
-            onPress={() => goBack()}
+            onPress={() => {
+              DeviceEventEmitter.emit('handleAlbumAdd',this.state.rawImg,this.state.description);
+              goBack();
+            }}
           ></FAB>
         </View>
       </PaperProvider>
     )
+  }
+  componentWillMount(){
+    this.setState({imgSource:fengling});
   }
 }

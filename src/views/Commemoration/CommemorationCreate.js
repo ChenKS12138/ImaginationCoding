@@ -119,7 +119,7 @@ export default class CommemorationCreate extends Component{
             style={styles.fab}
             icon='done'
             onPress={() => {
-              DeviceEventEmitter.emit('handleAdd',this.state.text,this.state.selectedDate,this.state.isAnnual);
+              DeviceEventEmitter.emit('handleCommemorationAdd',this.state.text,this.state.selectedDate,this.state.isAnnual);
               goBack();
             }}
           ></FAB>

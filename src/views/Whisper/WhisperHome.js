@@ -108,13 +108,13 @@ export default class WhisperHome extends Component{
       })
   }
   componentDidMount(){
-    DeviceEventEmitter.addListener('handleAdd',text => {
+    DeviceEventEmitter.addListener('handleWhisperAdd',text => {
       const OutDateMessageDate = this.state.messageData;
       OutDateMessageDate.push({text:text,time:moment().toDate(),mid:genKey()})
       this.setState({messageData:OutDateMessageDate});
       Storager.setStorage('whisper',JSON.stringify(this.state.messageData))
     })
-    DeviceEventEmitter.addListener('handleDelete',mid => {
+    DeviceEventEmitter.addListener('handleWhisperDelete',mid => {
       const OutDateMessageDate = this.state.messageData;
       const targerIndex = OutDateMessageDate.findIndex(item => item.mid === mid);
       OutDateMessageDate.splice(targerIndex,1);

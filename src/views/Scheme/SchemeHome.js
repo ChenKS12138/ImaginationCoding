@@ -128,7 +128,7 @@ export default class SchemeHome extends Component{
       });
   }
   componentDidMount(){
-    DeviceEventEmitter.addListener('handleAdd',title => {
+    DeviceEventEmitter.addListener('handleSchemeAdd',title => {
       const OutDateSchemeData = this.state.schemeData;
       OutDateSchemeData.push(
         {
@@ -141,14 +141,14 @@ export default class SchemeHome extends Component{
       this.setState({'schemeData':OutDateSchemeData});
       Storager.setStorage('scheme',JSON.stringify(OutDateSchemeData));
     })
-    DeviceEventEmitter.addListener('handleDelete',sid => {
+    DeviceEventEmitter.addListener('handleSchemeDelete',sid => {
       const OutDateSchemeData = this.state.schemeData;
       const targetIndex = OutDateSchemeData.findIndex(item => item.sid === sid);
       OutDateSchemeData.splice(targetIndex,1);
       this.setState({scheme:OutDateSchemeData});
       Storager.setStorage('scheme',JSON.stringify(OutDateSchemeData));
     });
-    DeviceEventEmitter.addListener('handleDaka',sid => {
+    DeviceEventEmitter.addListener('handleSchemeDaka',sid => {
       const OutDateSchemeData = this.state.schemeData;
       const target = OutDateSchemeData[OutDateSchemeData.findIndex(item => item.sid === sid)];
       if(target.timeList.length===0||moment(target.timeList[target.timeList.length-1]).format('YYYY-MM-DD') !== moment().format('YYYY-MM-DD')){

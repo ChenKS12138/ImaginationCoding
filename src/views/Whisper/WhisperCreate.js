@@ -78,7 +78,7 @@ export default class WhisperCreate extends Component{
             icon='done'
             onPress={() => {
               if(this.state.text){
-                DeviceEventEmitter.emit('handleAdd',this.state.text);
+                DeviceEventEmitter.emit('handleWhisperAdd',this.state.text);
                 goBack();
               }
             }}

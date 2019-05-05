@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
-import {View,Text,ScrollView,StyleSheet} from 'react-native';
+import {View,Text,ScrollView,StyleSheet,DeviceEventEmitter} from 'react-native';
 import {FAB,Avatar,Button,Card,Title,Paragraph,Drawer,Provider as PaperProvider,DefaultTheme} from 'react-native-paper';
+import moment from 'moment';
 
 import Welcome from '../../components/Welcome';
 import ColorBar from '../../components/ColorBar';
@@ -43,7 +44,7 @@ const theme = {
 
 export default class AlbumDetail extends Component{
   render(){
-    const {title='新照片',image=null,time='刚刚',description='这是照片'} = this.props.navigation.state.params;
+    const {image=null,time='刚刚',description='这是照片',fileName=null} = this.props.navigation.state.params;
     const {goBack} = this.props.navigation;
     return(
       <PaperProvider theme={theme}>
@@ -54,20 +55,19 @@ export default class AlbumDetail extends Component{
           onPress={() => goBack()}
         />
         <View style={styles.container}>
-          {/* <StatusBar style ={styles.statusBar} translucent={true} backgroundColor='#1874CD' /> */}
             <View style={styles.album}>
               <Welcome text="照片详情" />
               <ScrollView>
                 <Card
                   style={styles.card}
                 >
-                  <Card.Title title={title}/>
+                  <Card.Title title={description}/>
                   <Card.Cover 
-                    source={{image}}
+                    source={image}
                   />
                   <Card.Content>
                     <Paragraph>{description}</Paragraph>
-                    <Paragraph>{time}</Paragraph>
+                    <Paragraph>{moment(time).format('YYYY-MM-DD')}</Paragraph>
                   </Card.Content>
                 </Card>
               </ScrollView>
@@ -75,7 +75,10 @@ export default class AlbumDetail extends Component{
           <FAB
             style={styles.fab}
             icon='delete'
-            onPress={() => console.log('delete')}
+            onPress={() => {
+              DeviceEventEmitter.emit('handleAlbumDelete',fileName);
+              goBack();
+            }}
           ></FAB>
         </View>
       </PaperProvider>

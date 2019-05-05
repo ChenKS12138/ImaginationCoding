@@ -72,7 +72,7 @@ export default class CommemorationDetail extends Component{
             style={styles.fab}
             icon='delete'
             onPress={() => {
-              DeviceEventEmitter.emit('handleDelete',cid);
+              DeviceEventEmitter.emit('handleCommemorationDelete',cid);
               goBack();
             }}
           ></FAB>

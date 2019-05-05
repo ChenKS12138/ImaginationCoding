@@ -73,7 +73,7 @@ export default class WhisperDetail extends Component{
             style={styles.fab}
             icon='delete'
             onPress={() => {
-              DeviceEventEmitter.emit('handleDelete',mid);
+              DeviceEventEmitter.emit('handleWhisperDelete',mid);
               goBack();
             }}
           ></FAB>

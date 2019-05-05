@@ -151,7 +151,7 @@ export default class CommemorationHome extends Component{
       })
   }
   componentDidMount(){
-    DeviceEventEmitter.addListener('handleAdd',(text,date,isAnnual) => {
+    DeviceEventEmitter.addListener('handleCommemorationAdd',(text,date,isAnnual) => {
       const OutDateData = this.state.commemorationData;
       OutDateData.push(
         {
@@ -165,7 +165,7 @@ export default class CommemorationHome extends Component{
       this.setState({commemorationData:OutDateData});
       Storager.setStorage('commemoration',JSON.stringify(OutDateData));
     });
-    DeviceEventEmitter.addListener('handleDelete',cid => {
+    DeviceEventEmitter.addListener('handleCommemorationDelete',cid => {
       const OutDateData = this.state.commemorationData;
       const targetIndex = OutDateData.findIndex(item => item.cid === cid);
       OutDateData.splice(targetIndex,1);

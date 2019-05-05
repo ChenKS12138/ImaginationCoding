@@ -76,7 +76,7 @@ export default class SchemeDetail extends Component{
                   icon="done"
                   disabled={this.state.disabled}
                   onPress={() => {
-                    DeviceEventEmitter.emit('handleDaka',sid);
+                    DeviceEventEmitter.emit('handleSchemeDaka',sid);
                     this.setState({'disabled':true})
                     this.setState({'count':this.state.count+1});
                   }}
@@ -87,7 +87,7 @@ export default class SchemeDetail extends Component{
             style={styles.fab}
             icon='delete'
             onPress={() => {
-              DeviceEventEmitter.emit('handleDelete',sid);
+              DeviceEventEmitter.emit('handleSchemeDelete',sid);
               goBack();
             }}
           ></FAB>

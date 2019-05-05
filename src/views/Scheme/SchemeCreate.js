@@ -75,7 +75,7 @@ export default class SchemeCreate extends Component{
             style={styles.fab}
             icon='done'
             onPress={() => {
-              DeviceEventEmitter.emit('handleAdd',this.state.text);
+              DeviceEventEmitter.emit('handleSchemeAdd',this.state.text);
               goBack();
             }}
           ></FAB>
