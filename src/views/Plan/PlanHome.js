@@ -123,13 +123,14 @@ export default class PlanHome extends Component{
                 </Dialog>
               </Portal>
           </View>
-          <FAB
-            style={styles.fab}
-            icon='add'
-            onPress={() => this.setState({visible:!this.state.visible})}
-          ></FAB>
         </View>
         </PTRView>
+        
+        <FAB
+          style={styles.fab}
+          icon='add'
+          onPress={() => this.setState({visible:!this.state.visible})}
+        ></FAB>
       </PaperProvider>
     )
   }

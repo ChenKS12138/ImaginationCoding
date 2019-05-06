@@ -94,13 +94,13 @@ export default class SchemeHome extends Component{
                 <PaddingView />
               </ScrollView>
           </View>
-          <FAB
-            style={styles.fab}
-            icon='add'
-            onPress={() => navigate('AlbumCreate')}
-          ></FAB>
         </View>
         </PTRView>
+        <FAB
+          style={styles.fab}
+          icon='add'
+          onPress={() => navigate('AlbumCreate')}
+        ></FAB>
       </PaperProvider>
     )
   }

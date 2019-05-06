@@ -88,13 +88,14 @@ export default class WhisperHome extends Component{
                 <PaddingView />
               </ScrollView>
           </View>
-          <FAB
-            style={styles.fab}
-            icon='add'
-            onPress={() => navigate('WhisperCreate')}
-          ></FAB>
         </View>
         </PTRView>
+        
+        <FAB
+          style={styles.fab}
+          icon='add'
+          onPress={() => navigate('WhisperCreate')}
+        ></FAB>
       </PaperProvider>
     )
   }

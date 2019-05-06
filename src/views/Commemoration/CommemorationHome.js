@@ -97,13 +97,14 @@ export default class CommemorationHome extends Component{
                 <PaddingView />
               </ScrollView>
           </View>
+      </View>
+        </PTRView>
+        
         <FAB
           style={styles.fab}
           icon='add'
           onPress={() => navigate('CommemorationCreate')}
         ></FAB>
-      </View>
-        </PTRView>
       </PaperProvider>
     )
   }
