@@ -8,6 +8,7 @@ import ImageResizer from 'react-native-image-resizer';
 import Welcome from '../../components/Welcome';
 import ColorBar from '../../components/ColorBar';
 import HeaderBar from '../../components/HeaderBar';
+import theme from '../../config/theme';
 
 import fengling from '../../assets/img/img0.jpg';
 
@@ -45,15 +46,15 @@ const styles = StyleSheet.create({
   }
 })
 
-const theme = {
-  ...DefaultTheme,
-  roundness: 2,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: '#3498db',
-    accent: '#f1c40f',
-  }
-};
+// const theme = {
+//   ...DefaultTheme,
+//   roundness: 2,
+//   colors: {
+//     ...DefaultTheme.colors,
+//     primary: '#3498db',
+//     accent: '#f1c40f',
+//   }
+// };
 
 const pickerOptions = {
   title: 'Select Avatar',

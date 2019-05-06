@@ -10,6 +10,7 @@ import ColorBar from '../../components/ColorBar';
 import NavigationService from '../../utils/NavigationService';
 import Storager from '../../api/Storager.js';
 import PaddingView from '../../components/PaddingView';
+import theme from '../../config/theme';
 
 const styles = StyleSheet.create({
   container: {
@@ -36,15 +37,15 @@ const styles = StyleSheet.create({
   }
 })
 
-const theme = {
-  ...DefaultTheme,
-  roundness: 2,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: '#3498db',
-    accent: '#f1c40f',
-  }
-};
+// const theme = {
+//   ...DefaultTheme,
+//   roundness: 2,
+//   colors: {
+//     ...DefaultTheme.colors,
+//     primary: '#3498db',
+//     accent: '#f1c40f',
+//   }
+// };
 
 export default class PlanHome extends Component{
   state={

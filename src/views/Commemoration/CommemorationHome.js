@@ -11,6 +11,7 @@ import PaddingView from '../../components/PaddingView';
 import HeaderBar from '../../components/HeaderBar';
 import ColorBar from '../../components/ColorBar';
 import NavigationService from '../../utils/NavigationService';
+import theme from '../../config/theme';
 
 moment.updateLocale('zh-cn', momentLocale);
 
@@ -42,15 +43,15 @@ const styles = StyleSheet.create({
   }
 })
 
-const theme = {
-  ...DefaultTheme,
-  roundness: 2,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: '#3498db',
-    accent: '#f1c40f',
-  }
-};
+// const theme = {
+//   ...DefaultTheme,
+//   roundness: 2,
+//   colors: {
+//     ...DefaultTheme.colors,
+//     primary: '#3498db',
+//     accent: '#f1c40f',
+//   }
+// };
 
 export default class CommemorationHome extends Component{
   state={

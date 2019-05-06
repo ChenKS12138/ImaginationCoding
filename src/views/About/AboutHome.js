@@ -7,6 +7,7 @@ import Welcome from '../../components/Welcome';
 import ColorBar from '../../components/ColorBar';
 import HeaderBar from '../../components/HeaderBar';
 import NavigationService from '../../utils/NavigationService';
+import theme from '../../config/theme';
 
 const styles = StyleSheet.create({
   container: {
@@ -22,15 +23,15 @@ const styles = StyleSheet.create({
   }
 })
 
-const theme = {
-  ...DefaultTheme,
-  roundness: 2,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: '#3498db',
-    accent: '#f1c40f',
-  }
-};
+// const theme = {
+//   ...DefaultTheme,
+//   roundness: 2,
+//   colors: {
+//     ...DefaultTheme.colors,
+//     primary: '#3498db',
+//     accent: '#f1c40f',
+//   }
+// };
 
 export default class Whisper extends Component{
   render(){

@@ -1,6 +1,8 @@
 import React,{Component} from 'react';
 import {StatusBar,View} from 'react-native';
 
+import {statusBarColor} from '../config/color';
+
 export default class ColorBar extends Component{
   render(){
     return(
@@ -9,7 +11,8 @@ export default class ColorBar extends Component{
       }}>
         <StatusBar 
           translucent={true}
-          backgroundColor='#1874CD'
+          backgroundColor={statusBarColor}
+          // backgroundColor='#1874CD'
           animated={true}
         />
       </View>

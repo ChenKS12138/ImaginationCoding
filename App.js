@@ -11,6 +11,7 @@ import Album from './src/views/Album/Album';
 import Scheme from './src/views/Scheme/Scheme';
 import Plan from './src/views/Plan/Plan';
 import About from './src/views/About/About';
+import {baseRed} from './src/config/color';
 
 const styles = StyleSheet.create({
   container:{
@@ -84,7 +85,10 @@ const DrawerNavigatior = createDrawerNavigator(
     initialRouteName:'Home',
     edgeWidth:80,
     drawerWidth:250,
-    useNativeAnimations:false
+    useNativeAnimations:false,
+    contentOptions:{
+      activeTintColor:baseRed
+    }
   }
 )
 

@@ -13,15 +13,17 @@ import HeaderBar from '../components/HeaderBar';
 import ColorBar from '../components/ColorBar';
 import PaddingView from '../components/PaddingView';
 
-const theme = {
-  ...DefaultTheme,
-  roundness: 2,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: '#3498db',
-    accent: '#f1c40f',
-  }
-};
+import theme from '../config/theme';
+
+// const theme = {
+//   ...DefaultTheme,
+//   roundness: 2,
+//   colors: {
+//     ...DefaultTheme.colors,
+//     primary: '#3498db',
+//     accent: '#f1c40f',
+//   }
+// };
 
 const styles = StyleSheet.create({
   home:{

@@ -6,6 +6,7 @@ import Welcome from '../../components/Welcome';
 import HeaderBar from '../../components/HeaderBar';
 import ColorBar from '../../components/ColorBar';
 import Storager from '../../api/Storager';
+import theme from '../../config/theme';
 
 const styles = StyleSheet.create({
   container: {
@@ -35,15 +36,15 @@ const styles = StyleSheet.create({
   }
 })
 
-const theme = {
-  ...DefaultTheme,
-  roundness: 2,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: '#3498db',
-    accent: '#f1c40f',
-  }
-};
+// const theme = {
+//   ...DefaultTheme,
+//   roundness: 2,
+//   colors: {
+//     ...DefaultTheme.colors,
+//     primary: '#3498db',
+//     accent: '#f1c40f',
+//   }
+// };
 
 export default class WhisperCreate extends Component{
   state={

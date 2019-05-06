@@ -11,6 +11,7 @@ import PaddingView from '../../components/PaddingView';
 import ColorBar from '../../components/ColorBar';
 import NavigationService from '../../utils/NavigationService';
 import HeaderBar from '../../components/HeaderBar';
+import theme from '../../config/theme';
 
 import img0 from '../../assets/img/img0.jpg';
 import img2 from '../../assets/img/img2.jpg';
@@ -40,15 +41,15 @@ const styles = StyleSheet.create({
   }
 })
 
-const theme = {
-  ...DefaultTheme,
-  roundness: 2,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: '#3498db',
-    accent: '#f1c40f',
-  }
-};
+// const theme = {
+//   ...DefaultTheme,
+//   roundness: 2,
+//   colors: {
+//     ...DefaultTheme.colors,
+//     primary: '#3498db',
+//     accent: '#f1c40f',
+//   }
+// };
 
 export default class SchemeHome extends Component{
   state={

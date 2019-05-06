@@ -2,13 +2,15 @@ import React,{Component} from 'react';
 import {View,Text,StyleSheet} from 'react-native';
 
 import HeaderBarMenu from './HeaderBarMenu';
+import {baseRed} from '../config/color';
 
 const styles = StyleSheet.create({
   header:{
     margin:0,
     width:'100%',
     height:57,
-    backgroundColor:'#1874CD',
+    backgroundColor:baseRed,
+    // backgroundColor:'#1874CD',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
