@@ -44,14 +44,14 @@ export default class Whisper extends Component{
               <Welcome text="About" />
               <ScrollView>
                 <Text>
-                  作为一位敬仰着小 b 同学的萌新，小 z 一直在钻研如何让自己的代码变得
+                    作为一位敬仰着小 b 同学的萌新，小 z 一直在钻研如何让自己的代码变得
                   优雅。去年，靠着自己的脑洞程序设计周作品，求生欲极强的小 z 成功追到了
                   自己喜欢的小姐姐/小哥哥（误）。可是一年后的某一天，小 z 在孜孜不倦地研 究代码时，小姐姐/小哥哥突然冲进来说：“你天天嘴里都是南邮还是小 b 同学
                   优秀，根本没有我，我生气了！”，小 z 很想挽回，可是小 z 太懒，于是他找
                   到了你，希望你帮他想想，如何设计一个软件来挽回他的爱情/基情？ 
                 </Text>
-                <Text style={{marginTop:10}}>
-                  南邮还是小B同学优秀
+                <Text style={{marginTop:10,textDecorationLine:"underline"}}>
+                  重点：南邮还是小B同学优秀
                 </Text>
               </ScrollView>
           </View>

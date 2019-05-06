@@ -1,2 +1,1 @@
-const moment = require('moment');
-console.log(moment('2019').toDate())
+console.log([1,2,3,4,5,6].slice(0,8));

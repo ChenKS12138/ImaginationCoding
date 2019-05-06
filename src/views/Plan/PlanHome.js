@@ -1,8 +1,9 @@
 import React,{Component} from 'react';
-import {StyleSheet,Text,View,ScrollView,DeviceEventEmitter} from 'react-native';
+import {StyleSheet,Text,View,ScrollView,ToastAndroid} from 'react-native';
 import {TextInput,Portal,Dialog,FAB,Avatar,Button,Card,Title,Paragraph,Drawer,Provider as PaperProvider,DefaultTheme} from 'react-native-paper';
 import moment from 'moment';
 import genKey from '../../utils/randomString';
+import PTRView from 'react-native-pull-to-refresh-component';
 
 import Welcome from '../../components/Welcome';
 import HeaderBar from '../../components/HeaderBar';
@@ -11,6 +12,7 @@ import NavigationService from '../../utils/NavigationService';
 import Storager from '../../api/Storager.js';
 import PaddingView from '../../components/PaddingView';
 import theme from '../../config/theme';
+import {fabColor} from '../../config/color';
 
 const styles = StyleSheet.create({
   container: {
@@ -26,7 +28,7 @@ const styles = StyleSheet.create({
     margin: 16,
     right:0,
     top:420,
-    backgroundColor:'teal'
+    backgroundColor:fabColor
   },
   plan:{
     width:300
@@ -34,18 +36,11 @@ const styles = StyleSheet.create({
   card:{
     marginTop:5,
     marginBottom:5
+  },
+  PTR:{
+    backgroundColor:'#FFFAFA'
   }
 })
-
-// const theme = {
-//   ...DefaultTheme,
-//   roundness: 2,
-//   colors: {
-//     ...DefaultTheme.colors,
-//     primary: '#3498db',
-//     accent: '#f1c40f',
-//   }
-// };
 
 export default class PlanHome extends Component{
   state={
@@ -63,7 +58,8 @@ export default class PlanHome extends Component{
           iconType="menu"
           onPress={() => NavigationService.toggleDrawer()}
         />
-        <View style={styles.container}>
+        <PTRView onRefresh={async () => setTimeout(() => {return true},1000)} showsVerticalScrollIndicator={false} style={styles.PTR}>
+          <View style={styles.container}>
             <View style={styles.plan}>
               <ScrollView
                 showsVerticalScrollIndicator={false}
@@ -114,9 +110,14 @@ export default class PlanHome extends Component{
                   <Dialog.Actions>
                     <Button style={{marginRight:10}} color="red" onPress={() => this.setState({visible:!this.state.visible})}>取消</Button>
                     <Button color="green" onPress={() => {
-                      this.handlePlanAdd(this.state.text);
-                      this.setState({text:""});
-                      this.setState({visible:!this.state.visible})
+                      if(this.state.text.length){
+                        this.handlePlanAdd(this.state.text);
+                        this.setState({text:""});
+                        this.setState({visible:!this.state.visible})
+                      }
+                      else{
+                        ToastAndroid.show(`不要忘记写计划的内容~`,ToastAndroid.SHORT);
+                      }
                     }}>好的</Button>
                   </Dialog.Actions>
                 </Dialog>
@@ -128,6 +129,7 @@ export default class PlanHome extends Component{
             onPress={() => this.setState({visible:!this.state.visible})}
           ></FAB>
         </View>
+        </PTRView>
       </PaperProvider>
     )
   }

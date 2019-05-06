@@ -1,8 +1,9 @@
 import React,{Component} from 'react';
-import {View,Text,ScrollView,StyleSheet,DeviceEventEmitter} from 'react-native';
+import {View,Text,ScrollView,StyleSheet,DeviceEventEmitter,ToastAndroid} from 'react-native';
 import {TextInput,FAB,Avatar,Button,Card,Title,Paragraph,Drawer,Provider as PaperProvider,DefaultTheme,Switch} from 'react-native-paper';
 import DatePicker from 'react-native-datepicker';
 import moment from 'moment';
+import {fabColor} from '../../config/color';
 
 import Welcome from '../../components/Welcome';
 import HeaderBar from '../../components/HeaderBar';
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
     margin: 16,
     right:0,
     top:420,
-    backgroundColor:'green'
+    backgroundColor:fabColor
   },
   commemoration:{
     width:300
@@ -46,16 +47,6 @@ const styles = StyleSheet.create({
     marginTop:30
   }
 })
-
-// const theme = {
-//   ...DefaultTheme,
-//   roundness: 2,
-//   colors: {
-//     ...DefaultTheme.colors,
-//     primary: '#3498db',
-//     accent: '#f1c40f',
-//   }
-// };
 
 export default class CommemorationCreate extends Component{
   state={
@@ -120,8 +111,13 @@ export default class CommemorationCreate extends Component{
             style={styles.fab}
             icon='done'
             onPress={() => {
-              DeviceEventEmitter.emit('handleCommemorationAdd',this.state.text,this.state.selectedDate,this.state.isAnnual);
-              goBack();
+              if(this.state.text.length){
+                DeviceEventEmitter.emit('handleCommemorationAdd',this.state.text,this.state.selectedDate,this.state.isAnnual);
+                goBack();
+              }
+              else{
+                ToastAndroid.show(`不要忘了写纪念日的内容~`,ToastAndroid.SHORT);
+              }
             }}
           ></FAB>
         </View>

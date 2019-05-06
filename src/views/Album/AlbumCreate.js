@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {View,Text,ScrollView,StyleSheet,PermissionsAndroid,DeviceEventEmitter} from 'react-native';
+import {View,Text,ScrollView,StyleSheet,PermissionsAndroid,DeviceEventEmitter,ToastAndroid} from 'react-native';
 import {TextInput,FAB,Avatar,Button,Card,Title,Paragraph,Drawer,Provider as PaperProvider,DefaultTheme} from 'react-native-paper';
 import ImagePicker from 'react-native-image-picker';
 import RNFS from 'react-native-fs';
@@ -11,6 +11,7 @@ import HeaderBar from '../../components/HeaderBar';
 import theme from '../../config/theme';
 
 import fengling from '../../assets/img/img0.jpg';
+import {fabColor} from '../../config/color';
 
 const styles = StyleSheet.create({
   container: {
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
     margin: 16,
     right:0,
     top:420,
-    backgroundColor:'green'
+    backgroundColor:fabColor
   },
   album:{
     width:300
@@ -45,16 +46,6 @@ const styles = StyleSheet.create({
     backgroundColor:'transparent'
   }
 })
-
-// const theme = {
-//   ...DefaultTheme,
-//   roundness: 2,
-//   colors: {
-//     ...DefaultTheme.colors,
-//     primary: '#3498db',
-//     accent: '#f1c40f',
-//   }
-// };
 
 const pickerOptions = {
   title: 'Select Avatar',
@@ -160,8 +151,16 @@ export default class AlbumCreate extends Component{
             style={styles.fab}
             icon='done'
             onPress={() => {
-              DeviceEventEmitter.emit('handleAlbumAdd',this.state.rawImg,this.state.description);
-              goBack();
+              if(this.state.rawImg==null){
+                ToastAndroid.show(`请选择一张照片`,ToastAndroid.SHORT);
+              }
+              else if(this.state.description === ""){
+                ToastAndroid.show(`说点啥叭~`,ToastAndroid.SHORT);
+              }
+              else{
+                DeviceEventEmitter.emit('handleAlbumAdd',this.state.rawImg,this.state.description);
+                goBack();
+              }
             }}
           ></FAB>
         </View>

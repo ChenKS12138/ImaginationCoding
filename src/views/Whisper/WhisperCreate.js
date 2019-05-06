@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {View,Text,ScrollView,StyleSheet,DeviceEventEmitter} from 'react-native';
+import {View,Text,ScrollView,StyleSheet,DeviceEventEmitter,ToastAndroid} from 'react-native';
 import {TextInput,FAB,Avatar,Button,Card,Title,Paragraph,Drawer,Provider as PaperProvider,DefaultTheme} from 'react-native-paper';
 
 import Welcome from '../../components/Welcome';
@@ -7,6 +7,7 @@ import HeaderBar from '../../components/HeaderBar';
 import ColorBar from '../../components/ColorBar';
 import Storager from '../../api/Storager';
 import theme from '../../config/theme';
+import {fabColor} from '../../config/color';
 
 const styles = StyleSheet.create({
   container: {
@@ -22,7 +23,7 @@ const styles = StyleSheet.create({
     margin: 16,
     right:0,
     top:420,
-    backgroundColor:'green'
+    backgroundColor:fabColor
   },
   whisper:{
     width:300
@@ -35,16 +36,6 @@ const styles = StyleSheet.create({
     backgroundColor:'transparent'
   }
 })
-
-// const theme = {
-//   ...DefaultTheme,
-//   roundness: 2,
-//   colors: {
-//     ...DefaultTheme.colors,
-//     primary: '#3498db',
-//     accent: '#f1c40f',
-//   }
-// };
 
 export default class WhisperCreate extends Component{
   state={
@@ -81,6 +72,9 @@ export default class WhisperCreate extends Component{
               if(this.state.text){
                 DeviceEventEmitter.emit('handleWhisperAdd',this.state.text);
                 goBack();
+              }
+              else{
+                ToastAndroid.show(`不要忘记写悄悄话的内容~`,ToastAndroid.SHORT);
               }
             }}
           ></FAB>

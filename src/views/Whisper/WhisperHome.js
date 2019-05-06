@@ -3,6 +3,7 @@ import {StyleSheet,Text,View,StatusBar,ScrollView,DeviceEventEmitter} from 'reac
 import {FAB,Avatar,Button,Card,Title,Paragraph,Drawer,Provider as PaperProvider,DefaultTheme} from 'react-native-paper';
 import moment from 'moment';
 import genKey from '../../utils/randomString';
+import PTRView from 'react-native-pull-to-refresh-component';
 
 import Welcome from '../../components/Welcome';
 import HeaderBar from '../../components/HeaderBar';
@@ -11,6 +12,7 @@ import NavigationService from '../../utils/NavigationService';
 import Storager from '../../api/Storager.js';
 import PaddingView from '../../components/PaddingView';
 import theme from '../../config/theme';
+import {fabColor} from '../../config/color';
 
 const styles = StyleSheet.create({
   container: {
@@ -21,12 +23,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#FFFAFA',
   },
+  PTR:{
+    backgroundColor:'#FFFAFA'
+  },
   fab:{
     position:'absolute',
     margin: 16,
     right:0,
     top:420,
-    backgroundColor:'teal'
+    backgroundColor:fabColor
   },
   whisper:{
     width:300
@@ -36,16 +41,6 @@ const styles = StyleSheet.create({
     marginBottom:5
   }
 })
-
-// const theme = {
-//   ...DefaultTheme,
-//   roundness: 2,
-//   colors: {
-//     ...DefaultTheme.colors,
-//     primary: '#3498db',
-//     accent: '#f1c40f',
-//   }
-// };
 
 export default class WhisperHome extends Component{
   state={
@@ -61,7 +56,8 @@ export default class WhisperHome extends Component{
           iconType="menu"
           onPress={() => NavigationService.toggleDrawer()}
         />
-        <View style={styles.container}>
+        <PTRView onRefresh={async () => setTimeout(() => {return true},1000)} showsVerticalScrollIndicator={false} style={styles.PTR}>
+          <View style={styles.container}>
             <View style={styles.whisper}>
               <ScrollView
                 showsVerticalScrollIndicator={false}
@@ -98,6 +94,7 @@ export default class WhisperHome extends Component{
             onPress={() => navigate('WhisperCreate')}
           ></FAB>
         </View>
+        </PTRView>
       </PaperProvider>
     )
   }

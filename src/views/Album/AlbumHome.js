@@ -5,6 +5,7 @@ import moment from 'moment';
 import RNFS from 'react-native-fs';
 import Storager from '../../api/Storager.js';
 import genKey from '../../utils/randomString';
+import PTRView from 'react-native-pull-to-refresh-component';
 
 import Welcome from '../../components/Welcome';
 import PaddingView from '../../components/PaddingView';
@@ -13,8 +14,7 @@ import NavigationService from '../../utils/NavigationService';
 import HeaderBar from '../../components/HeaderBar';
 import theme from '../../config/theme';
 
-import img0 from '../../assets/img/img0.jpg';
-import img2 from '../../assets/img/img2.jpg';
+import {fabColor} from '../../config/color';
 
 const styles = StyleSheet.create({
   container: {
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     margin: 16,
     right:0,
     top:420,
-    backgroundColor:'teal'
+    backgroundColor:fabColor
   },
   album:{
     width:300
@@ -38,18 +38,11 @@ const styles = StyleSheet.create({
   card:{
     marginTop:5,
     marginBottom:5
+  },
+  PTR:{
+    backgroundColor:'#FFFAFA'
   }
 })
-
-// const theme = {
-//   ...DefaultTheme,
-//   roundness: 2,
-//   colors: {
-//     ...DefaultTheme.colors,
-//     primary: '#3498db',
-//     accent: '#f1c40f',
-//   }
-// };
 
 export default class SchemeHome extends Component{
   state={
@@ -66,7 +59,8 @@ export default class SchemeHome extends Component{
           iconType="menu"
           onPress={() => NavigationService.toggleDrawer()}
         />
-        <View style={styles.container}>
+        <PTRView onRefresh={async () => setTimeout(() => {return true},1000)} showsVerticalScrollIndicator={false} style={styles.PTR}>
+          <View style={styles.container}>
             <View style={styles.album}>
               <ScrollView
                 showsVerticalScrollIndicator={false}
@@ -106,6 +100,7 @@ export default class SchemeHome extends Component{
             onPress={() => navigate('AlbumCreate')}
           ></FAB>
         </View>
+        </PTRView>
       </PaperProvider>
     )
   }
@@ -125,7 +120,6 @@ export default class SchemeHome extends Component{
             this.setState({imageData:ImageSource});
           })
       });
-    // RNFS.readDir(RNFS.DocumentDirectoryPath).then(res => console.log(res));
   }
   componentDidMount(){
     DeviceEventEmitter.addListener('handleAlbumAdd',(imgSource,description) => {

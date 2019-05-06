@@ -33,16 +33,6 @@ const styles = StyleSheet.create({
   }
 })
 
-// const theme = {
-//   ...DefaultTheme,
-//   roundness: 2,
-//   colors: {
-//     ...DefaultTheme.colors,
-//     primary: '#3498db',
-//     accent: '#f1c40f',
-//   }
-// };
-
 export default class CommemorationDetail extends Component{
   state={
     visible:false

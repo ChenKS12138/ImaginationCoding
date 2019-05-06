@@ -5,6 +5,7 @@ import moment from 'moment';
 import momentLocale from 'moment/locale/zh-cn';
 import Storager from '../../api/Storager';
 import genKey from '../../utils/randomString';
+import PTRView from 'react-native-pull-to-refresh-component';
 
 import Welcome from '../../components/Welcome';
 import PaddingView from '../../components/PaddingView';
@@ -12,6 +13,7 @@ import HeaderBar from '../../components/HeaderBar';
 import ColorBar from '../../components/ColorBar';
 import NavigationService from '../../utils/NavigationService';
 import theme from '../../config/theme';
+import {fabColor} from '../../config/color';
 
 moment.updateLocale('zh-cn', momentLocale);
 
@@ -40,18 +42,11 @@ const styles = StyleSheet.create({
   ScrollView:{
     paddingTop: 5,
     paddingBottom: 30,
+  },
+  PTR:{
+    backgroundColor:'#FFFAFA'
   }
 })
-
-// const theme = {
-//   ...DefaultTheme,
-//   roundness: 2,
-//   colors: {
-//     ...DefaultTheme.colors,
-//     primary: '#3498db',
-//     accent: '#f1c40f',
-//   }
-// };
 
 export default class CommemorationHome extends Component{
   state={
@@ -67,7 +62,8 @@ export default class CommemorationHome extends Component{
           iconType="menu"
           onPress={() => NavigationService.toggleDrawer()}
         />
-        <View style={styles.container}>
+        <PTRView onRefresh={async () => setTimeout(() => {return true},1000)} showsVerticalScrollIndicator={false} style={styles.PTR}>
+          <View style={styles.container}>
             <View style={styles.commemoration}>
               <ScrollView
                 showsVerticalScrollIndicator={false}
@@ -101,12 +97,13 @@ export default class CommemorationHome extends Component{
                 <PaddingView />
               </ScrollView>
           </View>
-          <FAB
-            style={styles.fab}
-            icon='add'
-            onPress={() => navigate('CommemorationCreate')}
-          ></FAB>
-        </View>
+        <FAB
+          style={styles.fab}
+          icon='add'
+          onPress={() => navigate('CommemorationCreate')}
+        ></FAB>
+      </View>
+        </PTRView>
       </PaperProvider>
     )
   }

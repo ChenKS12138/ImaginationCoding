@@ -5181,6 +5181,11 @@ react-native-paper@^2.15.2:
     react-lifecycles-compat "^3.0.4"
     react-native-safe-area-view "^0.12.0"
 
+react-native-pull-to-refresh-component@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.npm.taobao.org/react-native-pull-to-refresh-component/download/react-native-pull-to-refresh-component-1.0.3.tgz#0d8bb8a2ade90cc8ccfd7b76d03f0662c1668ac6"
+  integrity sha1-DYu4oq3pDMjM/Xt20D8GYsFmisY=
+
 react-native-safe-area-view@^0.12.0:
   version "0.12.0"
   resolved "https://registry.npm.taobao.org/react-native-safe-area-view/download/react-native-safe-area-view-0.12.0.tgz#5c312f087300ecf82e8541c3eac25d560e147f22"

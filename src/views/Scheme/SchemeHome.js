@@ -4,6 +4,7 @@ import {FAB,Avatar,Button,Card,Title,Paragraph,Drawer,Provider as PaperProvider,
 import moment from 'moment';
 import genKey from '../../utils/randomString';
 import Storager from '../../api/Storager';
+import PTRView from 'react-native-pull-to-refresh-component';
 
 import Welcome from '../../components/Welcome';
 import PaddingView from '../../components/PaddingView';
@@ -11,6 +12,7 @@ import HeaderBar from '../../components/HeaderBar';
 import ColorBar from '../../components/ColorBar';
 import NavigationService from '../../utils/NavigationService';
 import theme from '../../config/theme';
+import {fabColor} from '../../config/color';
 
 const styles = StyleSheet.create({
   container: {
@@ -26,7 +28,7 @@ const styles = StyleSheet.create({
     margin: 16,
     right:0,
     top:420,
-    backgroundColor:'teal'
+    backgroundColor:fabColor
   },
   scheme:{
     width:300
@@ -34,18 +36,11 @@ const styles = StyleSheet.create({
   card:{
     marginTop:5,
     marginBottom:5
+  },
+  PTR:{
+    backgroundColor:'#FFFAFA'
   }
 })
-
-// const theme = {
-//   ...DefaultTheme,
-//   roundness: 2,
-//   colors: {
-//     ...DefaultTheme.colors,
-//     primary: '#3498db',
-//     accent: '#f1c40f',
-//   }
-// };
 
 export default class SchemeHome extends Component{
   state={
@@ -61,7 +56,8 @@ export default class SchemeHome extends Component{
           iconType="menu"
           onPress={() => NavigationService.toggleDrawer()}
         />
-        <View style={styles.container}>
+        <PTRView onRefresh={async () => setTimeout(() => {return true},1000)} showsVerticalScrollIndicator={false} style={styles.PTR}>
+          <View style={styles.container}>
             <View style={styles.scheme}>
               <ScrollView
                 showsVerticalScrollIndicator={false}
@@ -76,12 +72,12 @@ export default class SchemeHome extends Component{
                       style={styles.card}
                       key={index} 
                       onPress={() => navigate('SchemeDetail',{
-                        title:item.title,
+                        title:item.text,
                         timeList:item.timeList,
                         sid:item.sid
                       })}
                     >
-                      <Card.Title title={item.title} />
+                      <Card.Title title={item.text} />
                       <Card.Content>
                         <Text>已经 {item.timeList.length}天了 </Text>
                       </Card.Content>
@@ -102,6 +98,7 @@ export default class SchemeHome extends Component{
             onPress={() => navigate('SchemeCreate')}
           ></FAB>
         </View>
+        </PTRView>
       </PaperProvider>
     )
   }
@@ -116,7 +113,7 @@ export default class SchemeHome extends Component{
       const OutDateSchemeData = this.state.schemeData;
       OutDateSchemeData.push(
         {
-          title:title,
+          text:title,
           sid:genKey(),
           time:moment().toDate(),
           timeList:[]
