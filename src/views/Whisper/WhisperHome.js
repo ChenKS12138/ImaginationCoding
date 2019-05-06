@@ -56,7 +56,7 @@ export default class WhisperHome extends Component{
           iconType="menu"
           onPress={() => NavigationService.toggleDrawer()}
         />
-        <PTRView onRefresh={async () => setTimeout(() => {return true},1000)} showsVerticalScrollIndicator={false} style={styles.PTR}>
+        <PTRView offset={40} onRefresh={async () => setTimeout(() => {return true},1000)} showsVerticalScrollIndicator={false} style={styles.PTR}>
           <View style={styles.container}>
             <View style={styles.whisper}>
               <ScrollView
