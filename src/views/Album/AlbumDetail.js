@@ -1,7 +1,10 @@
 import React,{Component} from 'react';
 import {View,Text,ScrollView,StyleSheet,DeviceEventEmitter} from 'react-native';
 import {Portal,Dialog,FAB,Avatar,Button,Card,Title,Paragraph,Drawer,Provider as PaperProvider,DefaultTheme} from 'react-native-paper';
+import {captureRef} from "react-native-view-shot";
 import moment from 'moment';
+import Share from 'react-native-share';
+
 
 import Welcome from '../../components/Welcome';
 import ColorBar from '../../components/ColorBar';
@@ -24,8 +27,17 @@ const styles = StyleSheet.create({
     top:420,
     backgroundColor:'red'
   },
+  fab2:{
+    position:'absolute',
+    margin: 16,
+    right:0,
+    top:350,
+    backgroundColor:'green'
+  },
   album:{
-    width:300
+    width:300,
+    backgroundColor:'white',
+    padding:10
   },
   card:{
     marginTop:5,
@@ -49,9 +61,9 @@ export default class AlbumDetail extends Component{
           onPress={() => goBack()}
         />
         <View style={styles.container}>
-            <View style={styles.album}>
+            <View style={styles.album} ref="source">
               <Welcome text="照片详情" />
-              <ScrollView>
+              <ScrollView showsVerticalScrollIndicator={false}>
                 <Card
                   style={styles.card}
                 >
@@ -91,6 +103,23 @@ export default class AlbumDetail extends Component{
               this.setState({visible:!this.state.visible});
             }}
           ></FAB>
+          
+          <FAB
+          style={styles.fab2}
+          icon='share'
+          onPress={() => {
+            captureRef(this.refs.source,{
+              format: "jpg",
+              quality: 0.8,
+              result:"data-uri"
+            })
+              .then(res => {
+                Share.open({
+                  url:res
+                })
+              })            
+          }}
+        ></FAB>
         </View>
       </PaperProvider>
     )

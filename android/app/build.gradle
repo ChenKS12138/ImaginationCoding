@@ -105,8 +105,8 @@ android {
         applicationId "com.imaginationcoding"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1"
     }
     splits {
         abi {
@@ -138,6 +138,9 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-file-share')
+    implementation project(':react-native-share')
+    implementation project(':react-native-view-shot')
     implementation project(':react-native-image-resizer')
     implementation project(':react-native-fs')
     implementation project(':@react-native-community_async-storage')
